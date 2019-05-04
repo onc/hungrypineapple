@@ -37,19 +37,22 @@
     "description": "Your are doing bad",
     "city": 1,
     "complainer": 1,
-    "labels": [1]
+    "labels": [1],
+    "subscribers": [4]
   }, {
     "title": "My second complaint",
     "description": "Your are doing bad",
     "city": 2,
     "complainer": 1,
-    "labels": [2]
+    "labels": [2],
+    "subscribers": []
   }, {
     "title": "foo",
     "description": "bar",
     "city": 2,
     "complainer": 1,
-    "labels": [1, 2]
+    "labels": [1, 2],
+    "subscribers": []
   }],
   "Vote": [{
     "user": 1,

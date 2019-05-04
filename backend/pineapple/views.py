@@ -139,6 +139,30 @@ class VoteView(MethodView):
         return Response(status=200)
 
 
+class SubscriptionView(MethodView):
+    def get(self, user_id):
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        subscriptions = list(map(lambda s: s.to_dict(), user.subscriptions))
+        return jsonify(subscriptions)
+
+    def post(self, user_id, c_id):
+        complaint = Complaint.get(id=c_id)
+        if not complaint:
+            return Response(status=404)
+
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        complaint.subscribers.add(user)
+        commit()
+
+        return Response(status=200)
+
+
 class ComplaintView(MethodView):
     def get(self, id):
         if not id:
