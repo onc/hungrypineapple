@@ -1,25 +1,14 @@
 import json
 from os import path
 from flask import Flask, jsonify, request
-from flask.views import MethodView
 from flask_login import LoginManager, login_required
 from pony.flask import Pony
 from pony.orm import db_session, select
 from pineapple.models import Complaint, User, db
+from pineapple.views import ComplaintView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
-
-
-class ComplaintView(MethodView):
-    def get(self, id):
-        if not id:
-            complaints = select(p for p in Complaint)[:]
-            return jsonify(list(c.to_dict() for c in complaints))
-
-        complaint = Complaint.get(id=id)
-        return jsonify(complaint.to_dict())
-
 
 app.add_url_rule('/api/complaint',
                  defaults={'id': None},
