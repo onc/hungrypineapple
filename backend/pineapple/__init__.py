@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.update(DEBUG=True)
 
 
-app.add_url_rule('/api/user/<login>',
+app.add_url_rule('/api/user/<id>',
                  view_func=UserView.as_view('user'))
 
 app.add_url_rule('/api/user/<id>/complaints',

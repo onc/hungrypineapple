@@ -72,8 +72,10 @@ class ComplaintView(MethodView):
 
     def post(self, id):
         data = json.loads(request.data)
+        labels = select(l for l in Label if l.id in data['labels'])
         complaint = Complaint(title=data['title'],
                               description=data['description'],
-                              complainer=User.get(login=data['complainer']))
+                              complainer=User.get(id=data['complainer']),
+                              labels=labels)
         commit()
         return jsonify(complaint.to_dict())

@@ -44,7 +44,7 @@ class Complaint(db.Entity):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'complainer': self.complainer.login,
+            'complainer': self.complainer.id,
             'labels': list(map(lambda x: x.to_dict(), self.labels))
         }
 
