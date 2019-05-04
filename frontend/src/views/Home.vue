@@ -30,10 +30,11 @@
       </b-col>
     </b-row>
     <b-row class="complaints-container">
-      <b-col>
-        <b-row>
-          <b-col><h2>What people complain about</h2></b-col>
-        </b-row>
+      <b-col cols="5">
+            <h2>What people complain about</h2>
+      </b-col>
+      <b-col cols="1"></b-col>
+      <b-col cols="6">
         <b-row>
           <b-col><ComplaintBrief complaintid="1"></ComplaintBrief></b-col>
         </b-row>
@@ -49,13 +50,12 @@
       </b-col>
     </b-row>
     <b-row class="opencalls-container">
-      <b-col>
+      <b-col cols="5">
+          <h2>What you can help with</h2>
+      </b-col>
+      <b-col cols="1"></b-col>
+      <b-col cols="6">
         <b-row>
-          <b-col><h2>What you can help with</h2></b-col>
-        </b-row>
-        <b-row>
-          <b-col><OpenCallBrief></OpenCallBrief></b-col>
-          <b-col><OpenCallBrief></OpenCallBrief></b-col>
           <b-col><OpenCallBrief></OpenCallBrief></b-col>
           <b-col><OpenCallBrief></OpenCallBrief></b-col>
           <b-col><OpenCallBrief></OpenCallBrief></b-col>
