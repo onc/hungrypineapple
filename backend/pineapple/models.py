@@ -5,11 +5,30 @@ db = Database()
 db.bind(provider='sqlite', filename='db.sqlite', create_db=True)
 
 
+class Label(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    name = Required(str, unique=True)
+    complaint = Set('Complaint')
+
+    @db_session
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
+
 class User(db.Entity, UserMixin):
     id = PrimaryKey(int, auto=True)
     login = Required(str, unique=True)
     password = Required(str)
     complaints = Set('Complaint')
+
+    @db_session
+    def to_dict(self):
+        return {
+            'login': self.login
+        }
 
 
 class Complaint(db.Entity):
@@ -17,6 +36,7 @@ class Complaint(db.Entity):
     title = Required(str)
     description = Required(str)
     complainer = Required('User')
+    labels = Set('Label')
 
     @db_session
     def to_dict(self):
@@ -25,6 +45,7 @@ class Complaint(db.Entity):
             'title': self.title,
             'description': self.description,
             'complainer': self.complainer.login,
+            'labels': list(map(lambda x: x.to_dict(), self.labels))
         }
 
 

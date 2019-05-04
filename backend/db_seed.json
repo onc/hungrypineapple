@@ -1,12 +1,26 @@
 {
   "User": [{
-    "id": "1",
+    "id": 1,
     "login": "onze",
     "password": "onze"
   }],
+  "Label": [{
+    "id": 1,
+    "name": "foo"  
+  }, {
+    "id": 2,
+    "name": "bar"
+  }
+  ],
   "Complaint": [{
     "title": "My first complaint",
     "description": "Your are doing bad",
-    "complainer": "1"
+    "complainer": 1,
+    "labels": [1]
+  }, {
+    "title": "My second complaint",
+    "description": "Your are doing bad",
+    "complainer": 1,
+    "labels": [2]
   }]
 }
