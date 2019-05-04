@@ -79,6 +79,12 @@ class LabelComplaintsView(MethodView):
         return jsonify(list(c.to_dict() for c in complaints))
 
 
+class CityView(MethodView):
+    def get(self):
+        cities = select(p for p in City)[:]
+        return jsonify(list(c.to_dict() for c in cities))
+
+
 class LoggedInUserComplaintView(MethodView):
     def get(self, user_id):
         user = User.get(id=user_id)
