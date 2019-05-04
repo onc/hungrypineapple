@@ -1,4 +1,5 @@
 import json
+import datetime
 from flask.views import MethodView
 from pony.orm import select, commit
 from flask import jsonify, Response, request
@@ -65,6 +66,7 @@ class ComplaintView(MethodView):
         data = json.loads(request.data)
         complaint.title = data['title']
         complaint.description = data['description']
+        complaint.created_at = datetime.datetime.now()
         labels = select(l for l in Label if l.id in data['labels'])
         complaint.labels = labels
         commit()

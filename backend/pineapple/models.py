@@ -1,5 +1,6 @@
 from pony.orm import Required, Set, Optional, PrimaryKey, Database, db_session
 from flask_login import UserMixin
+import datetime
 
 db = Database()
 db.bind(provider='sqlite', filename='db.sqlite', create_db=True)
@@ -35,6 +36,8 @@ class Complaint(db.Entity):
     id = PrimaryKey(int, auto=True)
     title = Required(str)
     description = Required(str)
+    created_at = Required(datetime.datetime,
+                          default=datetime.datetime.utcnow)
     complainer = Required('User')
     labels = Set('Label')
 
@@ -45,6 +48,7 @@ class Complaint(db.Entity):
             'title': self.title,
             'description': self.description,
             'complainer': self.complainer.id,
+            'created_at': self.created_at.isoformat(),
             'labels': list(map(lambda x: x.to_dict(), self.labels))
         }
 
