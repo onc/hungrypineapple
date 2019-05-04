@@ -1,0 +1,23 @@
+{
+  /* turn off Vetur’s linting */
+  "vetur.completion.autoImport": false,
+
+  /* tell ESLint what languages we want it to validate */
+  "eslint.validate": [
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "html",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    }
+  ],
+  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": true,
+  "vetur.completion.useScaffoldSnippets": false
+}
