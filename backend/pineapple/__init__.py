@@ -5,9 +5,9 @@ from flask import Flask, jsonify, request
 from flask_login import LoginManager, login_required
 from pony.flask import Pony
 from pony.orm import db_session, select
-from pineapple.models import Complaint, User, db, Label
+from pineapple.models import Complaint, User, db, Label, City
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
-    LabelComplaintsView, LabelView
+    LabelComplaintsView, LabelView, CityComplaintsView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
@@ -21,6 +21,9 @@ app.add_url_rule('/api/user/<id>/complaints',
 
 app.add_url_rule('/api/label/<id>/complaint',
                  view_func=LabelComplaintsView.as_view('labelComplaints'))
+
+app.add_url_rule('/api/city/<id>/complaint',
+                 view_func=CityComplaintsView.as_view('cityComplaints'))
 
 app.add_url_rule('/api/complaint',
                  defaults={'id': None},
@@ -59,12 +62,18 @@ def seed_database(dump_filename):
         Label(id=record['id'],
               name=record['name'])
 
+    for record in data['City']:
+        City(id=record['id'],
+             name=record['name'])
+
     # going through the list of brands
     for record in data['Complaint']:
         labels = select(l for l in Label if l.id in record['labels'])
+        city = City.get(id=record['city'])
         Complaint(title=record['title'],
                   description=record['description'],
                   complainer=User.get(id=record['complainer']),
+                  city=city,
                   labels=labels)
 
 
