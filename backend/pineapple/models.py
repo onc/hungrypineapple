@@ -1,4 +1,5 @@
-from pony.orm import Required, Set, Optional, PrimaryKey, Database, db_session
+from pony.orm import Required, Set, Optional, PrimaryKey, Database, \
+    db_session, composite_key, select, count
 from flask_login import UserMixin
 import datetime
 
@@ -32,11 +33,48 @@ class Label(db.Entity):
         }
 
 
+class Feedback(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    text = Required(str)
+    user = Required('User')
+    complaint = Required('Complaint')
+    created_at = Required(datetime.datetime,
+                          default=datetime.datetime.utcnow)
+
+    @db_session
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user': self.user.id,
+            'complaint': self.complaint.id,
+            'text': self.text,
+            'created_at': self.created_at.isoformat()
+        }
+
+
+class Vote(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    user = Required('User')
+    complaint = Required('Complaint')
+    is_upvote = Required(bool)
+    composite_key(user, complaint)
+
+    @db_session
+    def to_dict(self):
+        return {
+            'user': self.user.id,
+            'complaint': self.complaint.id,
+            'is_upvote': self.is_upvote
+        }
+
+
 class User(db.Entity, UserMixin):
     id = PrimaryKey(int, auto=True)
     login = Required(str, unique=True)
     password = Required(str)
     complaints = Set('Complaint')
+    votes = Set('Vote')
+    feedbacks = Set('Feedback')
 
     @db_session
     def to_dict(self):
@@ -55,9 +93,19 @@ class Complaint(db.Entity):
     complainer = Required('User')
     city = Required('City')
     labels = Set('Label')
+    votes = Set('Vote')
+    feedbacks = Set('Feedback')
 
     @db_session
     def to_dict(self):
+        upvotes = select(count(c.votes)
+                         for c in Complaint
+                         if c.votes.is_upvote and c.id == self.id).first()
+
+        downvotes = select(count(c.votes)
+                           for c in Complaint
+                           if not c.votes.is_upvote and c.id == self.id).first()
+
         return {
             'id': self.id,
             'title': self.title,
@@ -66,6 +114,14 @@ class Complaint(db.Entity):
             'city': self.city.to_dict(),
             'complainer': self.complainer.id,
             'created_at': self.created_at.isoformat(),
+            'upvotes': upvotes,
+            'downvotes': downvotes,
+            'feedback': list(map(lambda f: {
+                'feedback_id': f.id,
+                'text': f.text,
+                'user': f.user.id,
+                'created_at': self.created_at.isoformat()
+            }, self.feedbacks)),
             'labels': list(map(lambda x: x.to_dict(), self.labels))
         }
 
