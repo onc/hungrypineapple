@@ -33,6 +33,25 @@ class Label(db.Entity):
         }
 
 
+class Feedback(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    text = Required(str)
+    user = Required('User')
+    complaint = Required('Complaint')
+    created_at = Required(datetime.datetime,
+                          default=datetime.datetime.utcnow)
+
+    @db_session
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user': self.user.id,
+            'complaint': self.complaint.id,
+            'text': self.text,
+            'created_at': self.created_at.isoformat()
+        }
+
+
 class Vote(db.Entity):
     id = PrimaryKey(int, auto=True)
     user = Required('User')
@@ -55,6 +74,7 @@ class User(db.Entity, UserMixin):
     password = Required(str)
     complaints = Set('Complaint')
     votes = Set('Vote')
+    feedbacks = Set('Feedback')
 
     @db_session
     def to_dict(self):
@@ -74,6 +94,7 @@ class Complaint(db.Entity):
     city = Required('City')
     labels = Set('Label')
     votes = Set('Vote')
+    feedbacks = Set('Feedback')
 
     @db_session
     def to_dict(self):
@@ -95,6 +116,12 @@ class Complaint(db.Entity):
             'created_at': self.created_at.isoformat(),
             'upvotes': upvotes,
             'downvotes': downvotes,
+            'feedback': list(map(lambda f: {
+                'feedback_id': f.id,
+                'text': f.text,
+                'user': f.user.id,
+                'created_at': self.created_at.isoformat()
+            }, self.feedbacks)),
             'labels': list(map(lambda x: x.to_dict(), self.labels))
         }
 

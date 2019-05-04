@@ -3,7 +3,7 @@ import datetime
 from flask.views import MethodView
 from pony.orm import select, commit
 from flask import jsonify, Response, request
-from pineapple.models import Complaint, User, Label, City, Vote
+from pineapple.models import Complaint, User, Label, City, Vote, Feedback
 
 
 class UserView(MethodView):
@@ -48,6 +48,27 @@ class UserComplaintsView(MethodView):
         return jsonify(list(c.to_dict() for c in complaints))
 
 
+class FeedbackView(MethodView):
+    def post(self, user_id, c_id):
+        complaint = Complaint.get(id=c_id)
+        if not complaint:
+            return Response(status=404)
+
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        data = json.loads(request.data)
+        text = data['text']
+
+        feedback = Feedback(user=user,
+                            complaint=complaint,
+                            text=text)
+        commit()
+
+        return jsonify(feedback.to_dict())
+
+
 class LabelComplaintsView(MethodView):
     def get(self, id):
         label = Label.get(id=id)
@@ -74,6 +95,12 @@ class LoggedInUserComplaintView(MethodView):
                 'complainer': c.complainer.id,
                 'created_at': c.created_at.isoformat(),
                 'is_upvote': value,
+                'feedback': list(map(lambda f: {
+                    'feedback_id': f.id,
+                    'text': f.text,
+                    'user': f.user.id,
+                    'created_at': f.created_at.isoformat()
+                }, c.feedbacks)),
                 'labels': list(map(lambda x: x.to_dict(), c.labels))
             }
 
@@ -123,7 +150,7 @@ class VoteView(MethodView):
         commit()
 
         return Response(status=200)
-        
+
 
 class ComplaintView(MethodView):
     def get(self, id):

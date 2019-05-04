@@ -8,7 +8,7 @@ from pony.orm import db_session, select
 from pineapple.models import Complaint, User, db, Label, City, Vote
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
     LabelComplaintsView, LabelView, CityComplaintsView, \
-    LoggedInUserComplaintView, VoteView
+    LoggedInUserComplaintView, VoteView, FeedbackView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
@@ -25,6 +25,9 @@ app.add_url_rule('/api/user/<user_id>/complaint',
 
 app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/vote',
                  view_func=VoteView.as_view('vote'))
+
+app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/feedback',
+                 view_func=FeedbackView.as_view('feedback'))
 
 # label related
 app.add_url_rule('/api/label/<id>/complaint',

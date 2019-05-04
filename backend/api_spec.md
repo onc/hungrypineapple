@@ -263,6 +263,29 @@ Response:
   ...
 ```
 
+## Feedback
+
+### Leave feedback
+
+http://localhost:5000/api/user/<user_id>/complaint/<id>/feedback
+
+```
+{
+	"text": "some feedback"
+}
+```
+
+Response:
+```
+{
+  "complaint": 1,
+  "created_at": "2019-05-04T21:00:40.688630",
+  "id": 1,
+  "text": "some feedback",
+  "user": 1
+}
+```
+
 ## Voting
 
 ### Give a vote
