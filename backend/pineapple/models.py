@@ -97,7 +97,27 @@ class Complaint(db.Entity):
     feedbacks = Set('Feedback')
 
     @db_session
-    def to_dict(self):
+    def to_dict_vote(self, vote):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'state': self.state,
+            'city': self.city.to_dict(),
+            'complainer': self.complainer.id,
+            'created_at': self.created_at.isoformat(),
+            'is_upvote': vote,
+            'feedback': list(map(lambda f: {
+                'feedback_id': f.id,
+                'text': f.text,
+                'user': f.user.id,
+                'created_at': f.created_at.isoformat()
+            }, self.feedbacks)),
+            'labels': list(map(lambda x: x.to_dict(), self.labels))
+        }
+
+    @db_session
+    def to_dict_sums(self):
         upvotes = select(count(c.votes)
                          for c in Complaint
                          if c.votes.is_upvote and c.id == self.id).first()
