@@ -5,37 +5,48 @@ from flask import Flask, jsonify, request
 from flask_login import LoginManager, login_required
 from pony.flask import Pony
 from pony.orm import db_session, select
-from pineapple.models import Complaint, User, db, Label, City
+from pineapple.models import Complaint, User, db, Label, City, Vote
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
-    LabelComplaintsView, LabelView, CityComplaintsView
+    LabelComplaintsView, LabelView, CityComplaintsView, \
+    LoggedInUserComplaintView, VoteView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
 
-
+# User related
 app.add_url_rule('/api/user/<id>',
                  view_func=UserView.as_view('user'))
 
 app.add_url_rule('/api/user/<id>/complaints',
                  view_func=UserComplaintsView.as_view('userComplaints'))
 
+app.add_url_rule('/api/user/<user_id>/complaint',
+                 view_func=LoggedInUserComplaintView.as_view('loggedInUser'))
+
+app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/vote',
+                 view_func=VoteView.as_view('vote'))
+
+# label related
 app.add_url_rule('/api/label/<id>/complaint',
                  view_func=LabelComplaintsView.as_view('labelComplaints'))
-
-app.add_url_rule('/api/city/<id>/complaint',
-                 view_func=CityComplaintsView.as_view('cityComplaints'))
-
-app.add_url_rule('/api/complaint',
-                 defaults={'id': None},
-                 view_func=ComplaintView.as_view('complaint'))
-app.add_url_rule('/api/complaint/<id>',
-                 view_func=ComplaintView.as_view('complaints'))
 
 app.add_url_rule('/api/label',
                  defaults={'id': None},
                  view_func=LabelView.as_view('label'))
 app.add_url_rule('/api/label/<id>',
                  view_func=LabelView.as_view('labels'))
+
+
+app.add_url_rule('/api/city/<id>/complaint',
+                 view_func=CityComplaintsView.as_view('cityComplaints'))
+
+# complaint views
+app.add_url_rule('/api/complaint',
+                 defaults={'id': None},
+                 view_func=ComplaintView.as_view('complaint'))
+app.add_url_rule('/api/complaint/<id>',
+                 view_func=ComplaintView.as_view('complaints'))
+
 
 Pony(app)
 login_manager = LoginManager(app)
@@ -75,6 +86,11 @@ def seed_database(dump_filename):
                   complainer=User.get(id=record['complainer']),
                   city=city,
                   labels=labels)
+
+    for record in data['Vote']:
+        Vote(user=User.get(id=record['user']),
+             complaint=Complaint.get(id=record['complaint']),
+             is_upvote=record['is_upvote'])
 
 
 seed_database(path.join(app.root_path, '..', 'db_seed.json'))

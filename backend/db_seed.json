@@ -17,8 +17,7 @@
   }, {
     "id": 2,
     "name": "bar"
-  }
-  ],
+  }],
   "Complaint": [{
     "title": "My first complaint",
     "description": "Your are doing bad",
@@ -31,5 +30,20 @@
     "city": 2,
     "complainer": 1,
     "labels": [2]
+  }, {
+    "title": "foo",
+    "description": "bar",
+    "city": 2,
+    "complainer": 1,
+    "labels": [1, 2]
+  }],
+  "Vote": [{
+    "user": 1,
+    "complaint": 2,
+    "is_upvote": true
+  }, {
+    "user": 1,
+    "complaint": 1,
+    "is_upvote": false
   }]
 }
