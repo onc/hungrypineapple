@@ -3,6 +3,20 @@
     "id": 1,
     "login": "onze",
     "password": "onze"
+  }, {
+    "id": 2,
+    "login": "mara",
+    "password": "mara",
+    "role": 1
+  }, {
+    "id": 3,
+    "login": "marko",
+    "password": "marko",
+    "role": 2
+  }, {
+    "id": 4,
+    "login": "kristina",
+    "password": "kristina"
   }],
   "City": [{
     "id": 1,
