@@ -8,5 +8,3 @@
 - Active the virtualenv: `source venv/bin/activate` (or `source venv/Scripts/active` if you are on windows).
 - Install the dependencies: `pip install -r requirements.txt`
 - Run the server: `python server.py`
-
-
