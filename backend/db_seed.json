@@ -1,0 +1,12 @@
+{
+  "User": [{
+    "id": "1",
+    "login": "onze",
+    "password": "onze"
+  }],
+  "Complaint": [{
+    "title": "My first complaint",
+    "description": "Your are doing bad",
+    "complainer": "1"
+  }]
+}
