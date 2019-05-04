@@ -34,14 +34,9 @@
         <b-row>
           <b-col><h2>What people complain about</h2></b-col>
         </b-row>
-        <b-row>
-          <b-col><ComplaintBrief complaintid="1"></ComplaintBrief></b-col>
-        </b-row>
-        <b-row>
-          <b-col><ComplaintBrief complaintid="2"></ComplaintBrief></b-col>
-        </b-row>
-        <b-row>
-          <b-col><ComplaintBrief complaintid="3"></ComplaintBrief></b-col>
+        <b-row v-for="complaint in complaints"
+        :key="complaint.id">
+          <b-col><ComplaintBrief :complaintid="complaint.id"></ComplaintBrief></b-col>
         </b-row>
         <b-row>
           <b-col><span class='see-more'>See more...</span></b-col>
@@ -89,7 +84,15 @@ export default {
   components: {
     Navbar, ComplaintBrief, OpenCallBrief
   },
-  props: ['city']
+  props: ['city'],
+  beforeCreate() {
+    this.$store.dispatch('fetchComplaints')
+  },
+  computed: {
+    complaints() {
+      return this.$store.state['data'].complaints
+    }
+  }
 }
 </script>
 
