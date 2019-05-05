@@ -105,5 +105,8 @@ export const getters = {
   },
   getLabelById: state => id => {
     return state.labels.find(c => c.id === id)
+  },
+  getOpencallsForUser: state => {
+    return state.opencalls
   }
 }
