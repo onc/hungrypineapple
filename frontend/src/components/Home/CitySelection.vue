@@ -1,13 +1,16 @@
 <template>
-  <el-autocomplete
-    class="inline-input"
-    v-model="searchInput"
-    :fetch-suggestions="querySearch"
-    placeholder="What city sere you?"
-    :trigger-on-focus="false"
-    @select="selectCity"
-    @keyup.enter="selectCity"
-  ></el-autocomplete>
+  <div>
+    <el-autocomplete
+      class="inline-input"
+      v-model="searchInput"
+      :fetch-suggestions="querySearch"
+      placeholder="City"
+      :trigger-on-focus="false"
+      @select="selectCity"
+      @keyup.enter="selectCity"
+    ></el-autocomplete>
+    <el-button @click="selectCity">Set</el-button>
+  </div>
 </template>
 
 <script>
@@ -15,12 +18,6 @@ import Service from '@/services/Service.js'
 
 export default {
   name: 'city-select',
-  props: {
-    city: {
-      type: String,
-      required: false
-    }
-  },
   data() {
     return {
       cities: [],
@@ -52,7 +49,7 @@ export default {
     selectCity(e) {
       this.$store.dispatch('selectCity', { cityId: e.id, cityName: e.value })
       this.$router.push({
-        name: 'home',
+        name: 'home-city',
         params: { city: e.value.toLowerCase() }
       })
     }
@@ -70,3 +67,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-input__inner {
+  width: 375px !important;
+}
+
+button.el-button {
+  margin-left: 20px;
+}
+</style>
