@@ -37,12 +37,11 @@ export default new Vuex.Store({
         commit('SET_USER', user.data)
       })
     },
-    fetchComplaintsForUser({ commit}, user) {
-      return Service.getComplaintsForUser(user.id)
-        .then(complaints => {
-          commit('SET_COMPLAINTS_FOR_USER', complaints.data)
-        })
-    },
+    fetchComplaintsForUser({ commit }, user) {
+      return Service.getComplaintsForUser(user.id).then(complaints => {
+        commit('SET_COMPLAINTS_FOR_USER', complaints.data)
+      })
+    }
   },
   getters: {
     getSelectedCity: state => {
@@ -53,6 +52,6 @@ export default new Vuex.Store({
     },
     getComplaintsForUser: state => {
       return state.complaints
-    },
+    }
   }
 })

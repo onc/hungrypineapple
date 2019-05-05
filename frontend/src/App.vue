@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <router-view :key="$route.fullPath" />
+    <transition name="moveInUp">
+      <router-view :key="$route.fullPath" />
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  components: {},
   beforeCreate() {
     this.$store.dispatch('fetchUser', 1)
     this.$store.dispatch('fetchCities')
     this.$store.dispatch('fetchComplaints')
     this.$store.dispatch('fetchOpencalls')
     this.$store.dispatch('fetchLabels')
+    this.$store.dispatch('fetchComplaintsForUser', { id: 1 })
   }
 }
 </script>
