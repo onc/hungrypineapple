@@ -34,6 +34,12 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
+  vote({ dispatch }, { user_id, c_id, vote }) {
+    return Service.postVote(user_id, c_id, vote)
+      .then(response => {
+        
+      });
+  },
   fetchComplaints({ commit }) {
     Service.getComplaints()
       .then(response => {
@@ -94,5 +100,7 @@ export const getters = {
   getLabelById: state => id => {
     return state.labels.find(c => c.id === id)
   },
-  getLabels: state => state.labels,
+  getOpencallsForUser: state => {
+    return state.opencalls
+  }
 }

@@ -48,4 +48,8 @@ export default {
 .my-nav {
   background-color: #ffa370;
 }
+
+a {
+  color: white;
+}
 </style>

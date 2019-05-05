@@ -54,16 +54,24 @@ import VotingArrows from '@/components/VotingArrows.vue'
 
 export default {
   name: 'ComplaintItem',
-  props: ['complaint'],
+  props: ['complaint', 'user'],
   components: {
     VotingArrows
   },
   methods: {
     upvote(complaint) {
-      console.log('upvoting: ', complaint)
+      this.$store.dispatch('vote', {
+        user_id: this.user.id,
+        c_id: complaint.id,
+        vote: { "is_upvote": true }
+      })
     },
     downvote(complaint) {
-      console.log('downvoting: ', complaint)
+      this.$store.dispatch('vote', {
+        user_id: this.user.id,
+        c_id: complaint.id,
+        vote: { "is_upvote": false }
+      })
     }
   },
   computed: {

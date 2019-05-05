@@ -1,88 +1,177 @@
 {
-  "User": [{
-    "id": 1,
-    "login": "onze",
-    "password": "onze"
-  }, {
-    "id": 2,
-    "login": "mara",
-    "password": "mara",
-    "role": 1
-  }, {
-    "id": 3,
-    "login": "marko",
-    "password": "marko",
-    "role": 2
-  }, {
-    "id": 4,
-    "login": "kristina",
-    "password": "kristina"
-  }],
-  "City": [{
-    "id": 1,
-    "name": "Prague"
-  }, {
-    "id": 2,
-    "name": "Brno"
-  }],
-  "Label": [{
-    "id": 1,
-    "name": "Transportation"  
-  }, {
-    "id": 2,
-    "name": "Infrastructure"
-  }],
-  "Complaint": [{
-    "title": "Lack of bicycle lanes in the city center",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Sed ac dolor sit amet purus malesuada congue. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Vestibulum fermentum tortor id mi. Nulla quis diam. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Poloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-    "city": 1,
-    "complainer": 1,
-    "labels": [1, 2],
-    "subscribers": [4]
-  }, {
-    "title": "Residential parking is working poorly",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Sed ac dolor sit amet purus malesuada congue.",
-    "city": 2,
-    "complainer": 1,
-    "labels": [2],
-    "subscribers": []
-  }, {
-    "title": "foo",
-    "description": "bar",
-    "city": 2,
-    "complainer": 1,
-    "labels": [1, 2],
-    "subscribers": []
-  }],
-  "OpenCall": [{
-    "title": "First opencall",
-    "description": "calll",
-    "city": 1,
-    "creator": 1,
-    "labels": [1],
-    "subscribers": [4]
-  }, {
-    "title": "Second open call",
-    "description": "More call",
-    "city": 2,
-    "creator": 1,
-    "labels": [2],
-    "subscribers": []
-  }, {
-    "title": "Third open call",
-    "description": "bar",
-    "city": 2,
-    "creator": 1,
-    "labels": [1, 2],
-    "subscribers": []
-  }],
-  "Vote": [{
-    "user": 1,
-    "complaint": 2,
-    "is_upvote": true
-  }, {
-    "user": 1,
-    "complaint": 1,
-    "is_upvote": false
-  }]
+  "User": [
+    {
+      "id": 1,
+      "login": "onze",
+      "password": "onze"
+    },
+    {
+      "id": 2,
+      "login": "mara",
+      "password": "mara",
+      "role": 1
+    },
+    {
+      "id": 3,
+      "login": "marko",
+      "password": "marko",
+      "role": 2
+    },
+    {
+      "id": 4,
+      "login": "kristina",
+      "password": "kristina"
+    }
+  ],
+  "City": [
+    {
+      "id": 1,
+      "name": "Prague"
+    },
+    {
+      "id": 2,
+      "name": "Brno"
+    }
+  ],
+  "Label": [
+    {
+      "id": 1,
+      "name": "Transportation"
+    },
+    {
+      "id": 2,
+      "name": "Infrastructure"
+    },
+    {
+      "id": 3,
+      "name": "Ecology"
+    },
+    {
+      "id": 4,
+      "name": "Civic amenities"
+    }
+  ],
+  "Complaint": [
+    {
+      "title": "Where do we build cycle roads?",
+      "description": "More than 60 % of the landscape in Brno is flat or moderately wavy, and it is therefore possible to use bikes as a means of transportation for a crucial number of passengers, alleviating the problem of overloaded transportation by motor vehicles. Due to the absence of suitable cycling infrastructure, the percentage of transportation by cycling is very low (around 1 %) and the development of new cycling infrastructure is practically non-existent. The city of Brno has an access to a general cycling infrastructure development plan and data which can give us an insight into the most suitable sites for cycling infrastructure development, such that the current problem with overloaded transportation is solved. Brno needs to create a model which would classify cycle routes as either “low-hanging fruits” (with the most potential for improvement), routes with moderate potential, and those with low potential. Any further insights gained by analyzing provided data, that could contribute to the popularization or improvement of conditions for cycling in Brno, are welcome.",
+      "city": 2,
+      "complainer": 1,
+      "labels": [1, 2],
+      "subscribers": [4]
+    },
+    {
+      "title": "Residential parking is working poorly",
+      "description": "We know about the number of parking vehicles over time, including information about the parking availability. It would be useful to map the availability of such parking lots over the course of 24 hours on selected days (Monday, Tuesday, Wednesday…). Alternatively, it would be interesting to investigate the possibility of mapping the availability of parking lots in combination with public transport schedules (ROPID) and create an app which would automatically suggest convenient public transport connections.",
+      "city": 2,
+      "complainer": 1,
+      "labels": [1, 2],
+      "subscribers": []
+    },
+    {
+      "title": "Traffic jams in city center",
+      "description": "Traffic is congested between 5AM-10AM and it's making travel to work unbearable. Can the town hall do something about it<",
+      "city": 2,
+      "complainer": 1,
+      "labels": [1],
+      "subscribers": []
+    },
+    {
+      "title": "Air pollution in city center",
+      "description": "Air pollution occurs when harmful or excessive quantities of substances including gases, particles, and biological molecules are introduced into Earth's atmosphere. It may cause diseases, allergies and even death to humans; it may also cause harm to other living organisms such as animals and food crops, and may damage the natural or built environment. Both human activity and natural processes can generate air pollution.",
+      "city": 2,
+      "complainer": 1,
+      "labels": [3],
+      "subscribers": []
+    },
+    {
+      "title": "There is no grocery store near Veslařská street",
+      "description": "A few older citizens reported a missing store in a close distance, which is definitely a bad thing.",
+      "city": 2,
+      "complainer": 1,
+      "labels": [4],
+      "subscribers": []
+    },
+    {
+      "title": "We need a better map for public transport and public buildings",
+      "description": "There is a need for aggregating townhall data about building and integration with Public Transport systems.",
+      "city": 2,
+      "complainer": 1,
+      "labels": [4],
+      "subscribers": []
+    }
+  ],
+  "OpenCall": [
+    {
+      "title": "Personalised map showing the quality of life in Czech cities motivation",
+      "description": "One of the main issues that homebuyers are facing is the lack of ease with identifying areas with the highest quality of life. This usually involves a lengthy process of individual research that ends up being biased, as there is no central resource for reliable real estate data and the information asymmetry in the market is fairly high. The purpose of this challenge is to develop a personalised and user-friendly map visualising the quality of life in Prague, Brno or other big cities in the Czech Republic. Use publicly available data and/or the data provided, develop creative ways to analyse non-transparent factors, and consider user-specified data to offer a personalised approach based on individual needs and beliefs. Possible questions",
+      "city": 1,
+      "creator": 1,
+      "labels": [4],
+      "subscribers": [4]
+    },
+    {
+      "title": "Creating a new community center",
+      "description": "Our city needs a new community center.",
+      "city": 2,
+      "creator": 2,
+      "labels": [2, 4],
+      "subscribers": []
+    },
+    {
+      "title": "Solving traffic situation using big data",
+      "description": "Collection, evaluation and processing of data describing the movement and behaviour of the population, data showing certain trends, then a combination of such data from different sources. The main factors here are mainly the causes behind these trends (the location of the beginning and the end of the journey, infrastructure, amenities and other). It is all about the combination of Mobile Network Operator data (MNO-data), traffic flow data (traffic surveys), social and demographic data, map applications data and more. The goal is the socalled Activity based model. The aim is approaching Smart City through the citizen (or rather clusters of citizens — buildings).",
+      "city": 2,
+      "creator": 3,
+      "labels": [1, 2],
+      "subscribers": []
+    }
+  ],
+  "Vote": [
+    {
+      "user": 1,
+      "complaint": 2,
+      "is_upvote": true
+    },
+    {
+      "user": 1,
+      "complaint": 3,
+      "is_upvote": true
+    },
+    {
+      "user": 3,
+      "complaint": 3,
+      "is_upvote": true
+    },
+    {
+      "user": 4,
+      "complaint": 3,
+      "is_upvote": true
+    },
+    {
+      "user": 2,
+      "complaint": 3,
+      "is_upvote": true
+    },
+    {
+      "user": 1,
+      "complaint": 1,
+      "is_upvote": true
+    },
+    {
+      "user": 3,
+      "complaint": 1,
+      "is_upvote": false
+    },
+    {
+      "user": 1,
+      "complaint": 4,
+      "is_upvote": true
+    },
+    {
+      "user": 2,
+      "complaint": 4,
+      "is_upvote": false
+    }
+  ]
 }
