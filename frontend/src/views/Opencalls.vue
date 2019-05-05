@@ -42,7 +42,7 @@
               <b-dropdown
                 text="Date"
                 variant="outline-dark"
-                style="width:100%; background: white"
+                style="width:100%; background: white !important;"
                 class="shadow-box"
               >
                 <b-dropdown-item href="#">An item</b-dropdown-item>
@@ -83,28 +83,37 @@
               </b-dropdown>
             </b-col>
           </b-row>
-          <b-row v-bind:key="item.id" v-for="item in complaintsForUser">
+          <b-row v-bind:key="item.id" v-for="item in opencalls">
             <b-col>
-              <ComplaintItem :complaint="item" />
+              <OpenCallBrief :opencall="item" />
             </b-col>
           </b-row>
         </b-col>
       </b-row>
-      <!-- <div v-bind:key="item.id" v-for="item in complaintsForUser">
-        <ComplaintItem :complaint="item" />
-      </div>-->
+      <div v-bind:key="item.id" v-for="item in opencalls">
+        <OpenCallBrief :opencall="item.id" />
+      </div>
     </b-container>
   </div>
 </template>
 
 <script>
+import OpencallItem from '@/components/Home/OpencallItem.vue'
+import OpenCallBrief from '@/components/Home/OpenCallBrief.vue'
 import Navbar from '@/components/Navbar.vue'
 import SearchField from '@/components/SearchField.vue'
 
 export default {
   components: {
+    OpencallItem,
+    OpenCallBrief,
     Navbar,
     SearchField
+  },
+  computed: {
+    opencalls() {
+      return this.$store.getters.getOpencalls
+    }
   }
 }
 </script>

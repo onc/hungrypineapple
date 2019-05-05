@@ -1,10 +1,39 @@
 <template>
   <div v-if="complaint" class="complaint-item">
-    <VotingArrows
-      :complaint="complaint"
-      :onUpvoteClick="upvote"
-      :onDownvoteClick="downvote"
-    />
+    <b-col cols="2" class="voting">
+      <VotingArrows
+        :complaint="complaint"
+        :onUpvoteClick="upvote"
+        :onDownvoteClick="downvote"
+      />
+    </b-col>
+    <b-col cols="10" class="complaint-details">
+      <b-row>
+        <b-col style="padding:0px">
+          <div class="complaint-title">
+            {{ complaint.title }}
+            <svg style="width:40px; height:20px;">
+              <circle cx="28" cy="8" r="8" fill="#68D89B"></circle>
+            </svg>
+          </div>
+        </b-col>
+        <!-- <b-col></b-col> -->
+      </b-row>
+      <b-row>
+        <div class="complaint-description">{{ complaint.description }}</div>
+      </b-row>
+      <b-row>
+        <div class="complaint-labels">
+          <span
+            v-bind:key="item.id"
+            class="complaint-label"
+            v-for="item in labels"
+            >{{ item.name }}</span
+          >
+        </div>
+      </b-row>
+    </b-col>
+    <!-- 
     <span class="complaint-details">
       <div class="complaint-title">{{ complaint.title }}</div>
       <div class="complaint-description">{{ complaint.description }}</div>
@@ -16,7 +45,7 @@
           >{{ item.name }}</span
         >
       </div>
-    </span>
+    </span>-->
   </div>
 </template>
 
@@ -57,20 +86,23 @@ export default {
 
 .complaint-details {
   display: inline-block;
-  float: left;
+  /* float: left; */
   margin: 20px;
 }
 
 .complaint-title {
-  font-size: 16px;
+  /* display: inline-block; */
+  font-size: 20px;
   font-weight: 600;
   text-align: left;
+  margin-bottom: 4px;
 }
 
 .complaint-description {
   font-size: 16px;
   font-weight: 400;
   text-align: left;
+  margin-bottom: 6px;
 }
 
 .complaint-labels {

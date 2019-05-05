@@ -1,10 +1,13 @@
 <template>
   <b-navbar toggleable="lg" class="my-nav">
     <b-navbar-brand
-      variant="info"
       v-if="!['home', 'home-city'].includes($route.name)"
+      style="font-weight:800"
+      class="see-more"
     >
-      <router-link :to="{ path: `/city/${city}/` }">Home page</router-link>
+      <router-link :to="{ path: `/city/${city}/` }"
+        >It's also up to us.</router-link
+      >
     </b-navbar-brand>
 
     <!-- Right aligned nav items -->
