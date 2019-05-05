@@ -5,10 +5,13 @@
 </template>
 
 <script>
-
 export default {
   name: 'app',
-  components: {
+  components: {},
+  beforeCreate() {
+    this.$store.dispatch('fetchCities')
+    this.$store.dispatch('fetchComplaints')
+    this.$store.dispatch('fetchLabels')
   }
 }
 </script>

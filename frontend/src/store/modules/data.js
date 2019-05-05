@@ -88,7 +88,7 @@ export const actions = {
   fetchLabels({ commit }) {
     Service.getCities()
       .then(response => {
-        commit('SET_CITIES', response.data)
+        commit('SET_LABELS', response.data)
       })
       .catch(error => {
         console.log('error> ' + error.message)
