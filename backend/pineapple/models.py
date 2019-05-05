@@ -11,6 +11,7 @@ class City(db.Entity):
     id = PrimaryKey(int, auto=True)
     name = Required(str, unique=True)
     complaints = Set('Complaint')
+    users = Set('User')
 
     @db_session
     def to_dict(self):
@@ -71,15 +72,20 @@ class Vote(db.Entity):
 class User(db.Entity, UserMixin):
     id = PrimaryKey(int, auto=True)
     login = Required(str, unique=True)
+    city = Optional('City')
     password = Required(str)
-    complaints = Set('Complaint')
+    # 0 = citizen, 1 = townhall, 2 = moderator
+    role = Required(int, default=0)
+    complaints = Set('Complaint', reverse="complainer")
     votes = Set('Vote')
     feedbacks = Set('Feedback')
+    subscriptions = Set('Complaint', reverse="subscribers")
 
     @db_session
     def to_dict(self):
         return {
-            'login': self.login
+            'login': self.login,
+            'subscriptions': list(map(lambda s: s.id, self.subscriptions))
         }
 
 
@@ -87,6 +93,7 @@ class Complaint(db.Entity):
     id = PrimaryKey(int, auto=True)
     title = Required(str)
     state = Required(str, default='OPEN')
+    approved = Required(bool, default=False)
     description = Required(str)
     created_at = Required(datetime.datetime,
                           default=datetime.datetime.utcnow)
@@ -95,9 +102,30 @@ class Complaint(db.Entity):
     labels = Set('Label')
     votes = Set('Vote')
     feedbacks = Set('Feedback')
+    subscribers = Set('User', reverse="subscriptions")
 
     @db_session
-    def to_dict(self):
+    def to_dict_vote(self, vote):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'state': self.state,
+            'city': self.city.to_dict(),
+            'complainer': self.complainer.id,
+            'created_at': self.created_at.isoformat(),
+            'is_upvote': vote,
+            'feedback': list(map(lambda f: {
+                'feedback_id': f.id,
+                'text': f.text,
+                'user': f.user.id,
+                'created_at': f.created_at.isoformat()
+            }, self.feedbacks)),
+            'labels': list(map(lambda x: x.to_dict(), self.labels))
+        }
+
+    @db_session
+    def to_dict_sums(self):
         upvotes = select(count(c.votes)
                          for c in Complaint
                          if c.votes.is_upvote and c.id == self.id).first()

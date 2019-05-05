@@ -79,30 +79,17 @@ class LabelComplaintsView(MethodView):
         return jsonify(list(c.to_dict() for c in complaints))
 
 
+class CityView(MethodView):
+    def get(self):
+        cities = select(p for p in City)[:]
+        return jsonify(list(c.to_dict() for c in cities))
+
+
 class LoggedInUserComplaintView(MethodView):
     def get(self, user_id):
         user = User.get(id=user_id)
         if not user:
             return Response(status=404)
-
-        def complaint_dict(c, value):
-            return {
-                'id': c.id,
-                'title': c.title,
-                'description': c.description,
-                'state': c.state,
-                'city': c.city.to_dict(),
-                'complainer': c.complainer.id,
-                'created_at': c.created_at.isoformat(),
-                'is_upvote': value,
-                'feedback': list(map(lambda f: {
-                    'feedback_id': f.id,
-                    'text': f.text,
-                    'user': f.user.id,
-                    'created_at': f.created_at.isoformat()
-                }, c.feedbacks)),
-                'labels': list(map(lambda x: x.to_dict(), c.labels))
-            }
 
         upvotes = select(c for c in Complaint if user in c.votes.user and
                          True in c.votes.is_upvote)
@@ -111,9 +98,9 @@ class LoggedInUserComplaintView(MethodView):
         other = Complaint.select(lambda c: c not in upvotes and
                                  c not in downvotes)
 
-        upvote_dict = [complaint_dict(u, True) for u in upvotes]
-        downvote_dict = [complaint_dict(u, False) for u in downvotes]
-        other_dict = [complaint_dict(u, None) for u in other]
+        upvote_dict = [u.to_dict_vote(True) for u in upvotes]
+        downvote_dict = [u.to_dict_vote(False) for u in downvotes]
+        other_dict = [u.to_dict_vote(None) for u in other]
 
         return jsonify(upvote_dict + downvote_dict + other_dict)
 
@@ -152,6 +139,30 @@ class VoteView(MethodView):
         return Response(status=200)
 
 
+class SubscriptionView(MethodView):
+    def get(self, user_id):
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        subscriptions = list(map(lambda s: s.to_dict(), user.subscriptions))
+        return jsonify(subscriptions)
+
+    def post(self, user_id, c_id):
+        complaint = Complaint.get(id=c_id)
+        if not complaint:
+            return Response(status=404)
+
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        complaint.subscribers.add(user)
+        commit()
+
+        return Response(status=200)
+
+
 class ComplaintView(MethodView):
     def get(self, id):
         if not id:
@@ -161,7 +172,7 @@ class ComplaintView(MethodView):
         complaint = Complaint.get(id=id)
         if not complaint:
             return Response(status=404)
-        return jsonify(complaint.to_dict())
+        return jsonify(complaint.to_dict_sums())
 
     def put(self, id):
         complaint = Complaint.get(id=id)
@@ -182,7 +193,7 @@ class ComplaintView(MethodView):
         complaint.labels = labels
 
         commit()
-        return jsonify(complaint.to_dict())
+        return jsonify(complaint.to_dict_sums())
 
     def post(self, id):
         data = json.loads(request.data)
@@ -197,4 +208,4 @@ class ComplaintView(MethodView):
                               city=city,
                               labels=labels)
         commit()
-        return jsonify(complaint.to_dict())
+        return jsonify(complaint.to_dict_sums())

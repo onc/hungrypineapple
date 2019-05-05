@@ -21,6 +21,10 @@ export default {
     return api.get('label/' + id)
   },
 
+  getCities() {
+    return api.get('city')
+  },
+
   getComplaints() {
     return api.get('complaint')
   },

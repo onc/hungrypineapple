@@ -8,7 +8,8 @@ from pony.orm import db_session, select
 from pineapple.models import Complaint, User, db, Label, City, Vote
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
     LabelComplaintsView, LabelView, CityComplaintsView, \
-    LoggedInUserComplaintView, VoteView, FeedbackView
+    LoggedInUserComplaintView, VoteView, FeedbackView, CityView, \
+    SubscriptionView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
@@ -17,8 +18,11 @@ app.config.update(DEBUG=True)
 app.add_url_rule('/api/user/<id>',
                  view_func=UserView.as_view('user'))
 
-app.add_url_rule('/api/user/<id>/complaints',
-                 view_func=UserComplaintsView.as_view('userComplaints'))
+app.add_url_rule('/api/user/<user_id>/subscriptions',
+                 view_func=SubscriptionView.as_view('subscriptions'))
+
+app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/subscribe',
+                 view_func=SubscriptionView.as_view('subscribe'))
 
 app.add_url_rule('/api/user/<user_id>/complaint',
                  view_func=LoggedInUserComplaintView.as_view('loggedInUser'))
@@ -32,6 +36,10 @@ app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/feedback',
 # label related
 app.add_url_rule('/api/label/<id>/complaint',
                  view_func=LabelComplaintsView.as_view('labelComplaints'))
+
+
+app.add_url_rule('/api/city',
+                 view_func=CityView.as_view('city'))
 
 app.add_url_rule('/api/label',
                  defaults={'id': None},
@@ -84,10 +92,12 @@ def seed_database(dump_filename):
     for record in data['Complaint']:
         labels = select(l for l in Label if l.id in record['labels'])
         city = City.get(id=record['city'])
+        subscribers = select(u for u in User if u.id in record['subscribers'])
         Complaint(title=record['title'],
                   description=record['description'],
                   complainer=User.get(id=record['complainer']),
                   city=city,
+                  subscribers=subscribers,
                   labels=labels)
 
     for record in data['Vote']:
