@@ -29,4 +29,8 @@ export default {
   height: 1000px;
   /* margin-top: 60px; */
 }
+
+body {
+  background-color: #eee;
+}
 </style>
