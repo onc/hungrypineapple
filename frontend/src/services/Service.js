@@ -42,5 +42,12 @@ export default {
   },
   postComplaint(c) {
     return api.post('complaint', c)
-  }
+  },
+  
+  getOpencalls() {
+    return api.get('opencall')
+  },
+  getOpencallById(id) {
+    return api.get('opencall/' + id)
+  },
 }

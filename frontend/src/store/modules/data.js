@@ -83,7 +83,7 @@ export const actions = {
   },
 
   fetchLabels({ commit }) {
-    Service.getCities()
+    Service.getLabels()
       .then(response => {
         commit('SET_LABELS', response.data)
       })
@@ -102,5 +102,8 @@ export const getters = {
   },
   getCityById: state => id => {
     return state.cities.find(c => c.id === id)
+  },
+  getLabelById: state => id => {
+    return state.labels.find(c => c.id === id)
   }
 }
