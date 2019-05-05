@@ -8,6 +8,7 @@
       :trigger-on-focus="false"
       @select="selectCity"
       @keyup.enter="selectCity"
+      autofocus="true"
     ></el-autocomplete>
     <el-button @click="selectCity">Set</el-button>
   </div>
