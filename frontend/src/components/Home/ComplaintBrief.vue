@@ -18,7 +18,7 @@
           >Show</b-button
         >
         <b-modal :id="`complaint-modal-${complaintid}`" size="lg" hide-header>
-          <ComplaintModal></ComplaintModal>
+          <ComplaintModal :id="complaintid"></ComplaintModal>
         </b-modal>
       </b-col>
     </b-row>
