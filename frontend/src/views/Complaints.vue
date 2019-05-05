@@ -1,7 +1,7 @@
 <template>
 <div>
   <h2>Complaints</h2>
-  <div v-for="item in complaintsForUser">
+  <div v-bind:key="item.id" v-for="item in complaintsForUser">
     <ComplaintItem :complaint="item" />
   </div>
 </div>

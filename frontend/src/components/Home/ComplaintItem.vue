@@ -1,11 +1,13 @@
 <template>
 <div v-if="complaint" class="complaint-item">
-  <VotingArrows :complaint="complaint" />
+  <VotingArrows :complaint="complaint"
+                :onUpvoteClick="upvote"
+                :onDownvoteClick="downvote"/>
   <span class="complaint-details">
     <div class="complaint-title">{{ complaint.title }}</div>
     <div class="complaint-description">{{ complaint.description }}</div>
     <div class="complaint-labels">
-      <span class="complaint-label" v-for="item in labels">{{ item.name }}</span>
+      <span v-bind:key="item.id" class="complaint-label" v-for="item in labels">{{ item.name }}</span>
     </div>
   </span>
 </div>
@@ -19,6 +21,14 @@ export default {
   props: ['complaint'],
   components: {
     VotingArrows
+  },
+  methods: {
+    upvote(complaint) {
+      console.log('upvoting: ', complaint);
+    },
+    downvote(complaint) {
+      console.log('downvoting: ', complaint);
+    }
   },
   computed:  {
     labels() {
