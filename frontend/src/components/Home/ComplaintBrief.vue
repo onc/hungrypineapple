@@ -3,7 +3,7 @@
     <b-row class="my-auto">
       <b-col cols="1" class="status my-auto">
         <svg style="width:20px; height:20px;">
-          <circle cx="8" cy="8" r="8" fill="black"></circle>
+          <circle cx="8" cy="8" r="8" fill="#68D89B"></circle>
         </svg>
       </b-col>
       <b-col cols="6" class="complaint-title my-auto">
@@ -47,6 +47,8 @@ export default {
   padding: 8px;
   background-color: white;
   height: 45px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 h3 {

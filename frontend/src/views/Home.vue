@@ -1,6 +1,6 @@
 <template>
   <div class="main-container" style="height:100%">
-    <b-navbar toggleable="lg" variant="info">
+    <b-navbar toggleable="lg">
       <b-navbar-brand href="#">Home page</b-navbar-brand>
 
       <!-- Right aligned nav items -->
@@ -36,8 +36,20 @@
         </b-col>
       </b-row>
       <b-row class="complaints-container" style="height:30%">
-        <b-col cols="5">
-          <h2>What people complain about?</h2>
+        <b-col cols="5" class="complaints-titles">
+          <b-row>
+            <b-col>
+              <h2>What people complain about?</h2>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <h5>
+                Don’t feel in Brno as in your city? Look what others are
+                complaining about and help the change!
+              </h5>
+            </b-col>
+          </b-row>
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="6">
@@ -55,7 +67,19 @@
       </b-row>
       <b-row class="opencalls-container" style="height:30%">
         <b-col cols="5">
-          <h2>What you can help with?</h2>
+          <b-row>
+            <b-col>
+              <h2>What you can help with?</h2>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <h5>
+                Do you have special skills and want to help your city? Offer
+                your help and improve the quality of everyone’s life!
+              </h5>
+            </b-col>
+          </b-row>
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="6">
@@ -121,6 +145,19 @@ export default {
 <style>
 .main-container {
   background-color: #eee;
+  background-image: url(/lady.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.complaints-titles {
+  color: white;
+}
+
+@media screen and (max-width: 1600px) {
+  .complaints-titles {
+    color: black;
+  }
 }
 
 .see-more {
@@ -143,5 +180,11 @@ h3 {
   font-size: 16px;
   font-weight: 600;
   text-align: left;
+}
+
+h5 {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
 }
 </style>
