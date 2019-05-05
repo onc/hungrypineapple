@@ -1,6 +1,9 @@
 <template>
   <b-navbar toggleable="lg" class="my-nav">
-    <b-navbar-brand href="#" variant="info">
+    <b-navbar-brand
+      variant="info"
+      v-if="!['home', 'home-city'].includes($route.name)"
+    >
       <router-link :to="{ path: `/city/${city}/` }">Home page</router-link>
     </b-navbar-brand>
 
