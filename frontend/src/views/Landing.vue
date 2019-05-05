@@ -1,32 +1,20 @@
 <template>
-  <el-container>
-    <el-header>
-      <h1>Sere mě to</h1>
-      {{ user.login }}
-    </el-header>
-
-    <el-main>
-      <el-autocomplete
-        class="inline-input"
-        v-model="searchInput"
-        :fetch-suggestions="querySearch"
-        placeholder="What city sere you?"
-        :trigger-on-focus="false"
-        @select="selectCity"
-        @keyup.enter="selectCity"
-      ></el-autocomplete>
-    </el-main>
-
-    <el-footer>HackPrague 2019, created 28. 4. 2019</el-footer>
-  </el-container>
+  <el-autocomplete
+    class="inline-input"
+    v-model="searchInput"
+    :fetch-suggestions="querySearch"
+    placeholder="What city sere you?"
+    :trigger-on-focus="false"
+    @select="selectCity"
+    @keyup.enter="selectCity"
+  ></el-autocomplete>
 </template>
 
 <script>
 import Service from '@/services/Service.js'
 
 export default {
-  name: 'home',
-  components: {},
+  name: 'city-select',
   props: {
     city: {
       type: String,
@@ -60,9 +48,6 @@ export default {
       return v => {
         return v.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
       }
-    },
-    loadAll() {
-      return [{ value: 'Brno', id: '1' }, { value: 'Praha', id: '2' }]
     },
     selectCity(e) {
       this.$store.dispatch('selectCity', { cityId: e.id, cityName: e.value })

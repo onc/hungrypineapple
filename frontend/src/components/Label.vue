@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <span class="badge badge-pill badge-secondary">{{ label.name }}</span>
-  </div>
+  <span class="badge badge-pill badge-secondary">{{ label.name }}</span>
 </template>
 
 <script>
@@ -20,4 +18,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.badge {
+  background: #c4c4c4;
+  border-radius: 13px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 6px 8px;
+  margin-left: 0;
+}
+</style>
