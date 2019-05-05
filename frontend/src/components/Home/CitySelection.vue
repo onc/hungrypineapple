@@ -10,7 +10,6 @@
       @keyup.enter="selectCity"
       autofocus="true"
     ></el-autocomplete>
-    <el-button @click="selectCity">Set</el-button>
   </div>
 </template>
 
@@ -71,7 +70,7 @@ export default {
 
 <style>
 .el-input__inner {
-  width: 375px !important;
+  width: 460px !important;
 }
 
 button.el-button {
