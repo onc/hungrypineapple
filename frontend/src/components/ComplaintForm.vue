@@ -43,7 +43,7 @@
       </div>
 
       <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="reset" variant="danger">Cancel</b-button>
     </b-form>
   </div>
 </template>
@@ -56,7 +56,7 @@ export default {
       form: {
         title: '',
         description: '',
-        labels: []
+        labels: [],
       },
     }
   },
@@ -87,10 +87,14 @@ export default {
     },
     submit(evt) {
       evt.preventDefault();
-      console.log(this);
-      this.onSubmit(evt);
+      const formData = this.form;
+      formData.complainer = this.user.id;
+      formData.labels = Array.from(formData.labels, label => label.id);
+      formData.city = 1;
+      this.onSubmit(evt, formData);
     },
     reset(evt) {
+      evt.preventDefault();
       this.onReset(evt);
     }
   }

@@ -66,9 +66,18 @@
       <b-row style="height:10%;padding:20px;">
         <b-col cols="9"></b-col>
         <b-col style="padding-right:0em">
-          <b-button class="bootstrap-botton-color"
+          <b-button
+            class="bootstrap-botton-color"
+            v-b-modal="'complaint-form-modal'"
             >Submit a new complaint</b-button
           >
+          <b-modal id="complaint-form-modal"
+                   size="lg"
+                   cancel-disabled
+                   hide-footer
+                   hide-header>
+            <ComplaintFormModal :onClose="closeModal"/>
+          </b-modal>
         </b-col>
       </b-row>
       <b-row style="height:60%;">
@@ -109,6 +118,7 @@
 import ComplaintItem from '@/components/Home/ComplaintItem.vue'
 import Navbar from '@/components/Navbar.vue'
 import SearchField from '@/components/SearchField.vue'
+import ComplaintFormModal from '@/components/ComplaintFormModal.vue';
 
 export default {
   name: 'Complaints',
@@ -116,7 +126,8 @@ export default {
   components: {
     ComplaintItem,
     Navbar,
-    SearchField
+    SearchField,
+    ComplaintFormModal
   },
   computed: {
     user() {
@@ -129,6 +140,11 @@ export default {
   watch: {
     user(newUser) {
       this.$store.dispatch('fetchComplaintsForUser', newUser)
+    }
+  },
+  methods: {
+    closeModal() {
+      this.$bvModal.hide('complaint-form-modal');
     }
   }
 }
