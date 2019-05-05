@@ -34,6 +34,12 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
+  vote({ dispatch }, { user_id, c_id, vote }) {
+    return Service.postVote(user_id, c_id, vote)
+      .then(response => {
+        
+      });
+  },
   fetchComplaints({ commit }) {
     Service.getComplaints()
       .then(response => {

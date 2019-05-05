@@ -41,7 +41,7 @@ export default {
     return api.post('complaint/' + id, c)
   },
   postComplaint(c) {
-    return api.post('complaint', c)
+   return api.post('complaint', c)
   },
 
   getOpencalls() {
@@ -49,5 +49,8 @@ export default {
   },
   getOpencallById(id) {
     return api.get('opencall/' + id)
+  },
+  postVote(user_id, c_id, vote) {
+    return api.post(`user/${user_id}/complaint/${c_id}/vote`, vote);
   }
 }

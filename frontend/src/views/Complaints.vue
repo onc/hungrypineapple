@@ -100,7 +100,7 @@
           </b-row>
           <b-row v-bind:key="item.id" v-for="item in complaintsForUser">
             <b-col>
-              <ComplaintItem :complaint="item" />
+              <ComplaintItem :complaint="item" :user="user" />
             </b-col>
           </b-row>
         </b-col>
