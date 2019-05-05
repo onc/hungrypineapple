@@ -159,7 +159,7 @@ export default {
 
 @media screen and (max-width: 1600px) {
   .complaints-titles {
-    color: black;
+    color: #2c3e50;
   }
 }
 

@@ -7,8 +7,7 @@
 <script>
 export default {
   name: 'app',
-  components: {
-  },
+  components: {},
   beforeCreate() {
     this.$store.dispatch('fetchUser', 1)
     this.$store.dispatch('fetchCities')
@@ -34,5 +33,6 @@ export default {
 
 body {
   background-color: #eee;
+  color: #2c3e50;
 }
 </style>
