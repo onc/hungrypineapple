@@ -22,9 +22,9 @@
             <b-col class="my-auto">
               <div class="main-title">
                 Help us improve
-                <a class="change-city">
-                  {{ (city ? city : '…') | capitalize }}
-                </a>
+                <a class="change-city" @submit="">{{
+                  (city ? city : '…') | capitalize
+                }}</a>
               </div>
             </b-col>
           </b-row>
@@ -63,8 +63,8 @@
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="6">
-          <b-row v-for="complaint in complaints" :key="complaint.id">
-            <b-col>
+          <b-row v-for="(complaint, index) in complaints" :key="complaint.id">
+            <b-col v-if="index < 3">
               <ComplaintBrief :complaintid="complaint.id"></ComplaintBrief>
             </b-col>
           </b-row>
@@ -99,18 +99,23 @@
         <b-col cols="6">
           <b-row style="height:60%">
             <b-col
-              v-for="opencall in opencalls"
+              v-for="(opencall, index) in opencalls"
               :key="opencall.id"
               style="padding: inherit; height: 100%"
             >
-              <OpenCallBrief :opencallid="opencall.id"></OpenCallBrief>
+              <OpenCallBrief
+                :opencallid="opencall.id"
+                v-if="index < 3"
+              ></OpenCallBrief>
             </b-col>
           </b-row>
           <b-row>
             <b-col style="padding-top:15px;">
-              <router-link :to="{ path: `/city/${city}/opencalls` }"
-                >See more</router-link
-              >
+              <span class="see-more">
+                <router-link :to="{ path: `/city/${city}/opencalls` }"
+                  >See more</router-link
+                >
+              </span>
             </b-col>
           </b-row>
         </b-col>
@@ -125,6 +130,18 @@ import OpenCallBrief from '@/components/Home/OpenCallBrief.vue'
 import Navbar from '@/components/Navbar.vue'
 import CitySelection from '@/components/Home/CitySelection.vue'
 
+/*let options = {
+  shouldSort: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 2,
+  keys: ['title', 'description']
+}*/
+/*var fuse = new Fuse(list, options); // "list" is the item array
+var result = fuse.search("");
+*/
 export default {
   components: {
     ComplaintBrief,
@@ -176,7 +193,7 @@ export default {
 
 .nav-text {
   font-weight: 800;
-  padding: 0px 20px 0px 20px;
+  padding: 0px 10px 0px 10px;
 }
 
 .see-more {
