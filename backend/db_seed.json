@@ -27,21 +27,21 @@
   }],
   "Label": [{
     "id": 1,
-    "name": "foo"  
+    "name": "Transportation"  
   }, {
     "id": 2,
-    "name": "bar"
+    "name": "Infrastructure"
   }],
   "Complaint": [{
-    "title": "My first complaint",
-    "description": "Your are doing bad",
+    "title": "Lack of bicycle lanes in the city center",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Sed ac dolor sit amet purus malesuada congue. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Vestibulum fermentum tortor id mi. Nulla quis diam. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Poloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
     "city": 1,
     "complainer": 1,
-    "labels": [1],
+    "labels": [1, 2],
     "subscribers": [4]
   }, {
-    "title": "My second complaint",
-    "description": "Your are doing bad",
+    "title": "Residential parking is working poorly",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Sed ac dolor sit amet purus malesuada congue.",
     "city": 2,
     "complainer": 1,
     "labels": [2],
