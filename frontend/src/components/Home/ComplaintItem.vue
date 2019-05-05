@@ -1,16 +1,23 @@
 <template>
-<div v-if="complaint" class="complaint-item">
-  <VotingArrows :complaint="complaint"
-                :onUpvoteClick="upvote"
-                :onDownvoteClick="downvote"/>
-  <span class="complaint-details">
-    <div class="complaint-title">{{ complaint.title }}</div>
-    <div class="complaint-description">{{ complaint.description }}</div>
-    <div class="complaint-labels">
-      <span v-bind:key="item.id" class="complaint-label" v-for="item in labels">{{ item.name }}</span>
-    </div>
-  </span>
-</div>
+  <div v-if="complaint" class="complaint-item">
+    <VotingArrows
+      :complaint="complaint"
+      :onUpvoteClick="upvote"
+      :onDownvoteClick="downvote"
+    />
+    <span class="complaint-details">
+      <div class="complaint-title">{{ complaint.title }}</div>
+      <div class="complaint-description">{{ complaint.description }}</div>
+      <div class="complaint-labels">
+        <span
+          v-bind:key="item.id"
+          class="complaint-label"
+          v-for="item in labels"
+          >{{ item.name }}</span
+        >
+      </div>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -24,13 +31,13 @@ export default {
   },
   methods: {
     upvote(complaint) {
-      console.log('upvoting: ', complaint);
+      console.log('upvoting: ', complaint)
     },
     downvote(complaint) {
-      console.log('downvoting: ', complaint);
+      console.log('downvoting: ', complaint)
     }
   },
-  computed:  {
+  computed: {
     labels() {
       return this.complaint.labels
     }
@@ -40,46 +47,47 @@ export default {
 
 <style scoped>
 .complaint-item {
-    width: 100%;
-    background-color: white;
-    margin: 8px 32px 8px 32px;
-    border-radius: 8px;
-    display: inline-block;
+  width: 100%;
+  background-color: white;
+  margin: 8px 0px 8px 0px;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .complaint-details {
-    display: inline-block;
-    float: left;
-    margin: 20px;
+  display: inline-block;
+  float: left;
+  margin: 20px;
 }
 
 .complaint-title {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
 }
 
 .complaint-description {
-    font-size: 16px;
-    font-weight: 400;
-    text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
 }
 
 .complaint-labels {
-    float: left;
+  float: left;
 }
 
 .complaint-label {
-    background: #C4C4C4;
-    border-radius: 13px;
-    padding: 5px;
-    min-width: 75px;
-    height: 25px;
-    margin: 3px;
-    margin-right: 10px;
-    line-height: 16px;
-    display: inline-block;
-    font-size: 12px;
-    color: white;
+  background: #c4c4c4;
+  border-radius: 13px;
+  padding: 5px;
+  min-width: 75px;
+  height: 25px;
+  margin: 3px;
+  margin-right: 10px;
+  line-height: 16px;
+  display: inline-block;
+  font-size: 12px;
+  color: white;
 }
 </style>

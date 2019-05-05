@@ -222,6 +222,21 @@ h5 {
   text-align: left;
 }
 
+.category-title {
+  font-size: 26px;
+  font-weight: 900;
+  padding-bottom: 0.4em;
+  /* padding-left: 0.4em; */
+  /* padding-top: 0.8em; */
+  text-align: left;
+}
+
+.bootstrap-botton-color {
+  background-color: #ffa370;
+  border-style: none;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
 @media screen and (max-width: 1200px) {
   .main-title {
     color: #2c3e50;
