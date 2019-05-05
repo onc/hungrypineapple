@@ -136,11 +136,12 @@ class Complaint(db.Entity):
     def to_dict_vote(self, vote):
         upvotes = select(count(c.votes)
                          for c in Complaint
-                         if c.votes.is_upvote and c.id == self.id).first()
+                         if True in c.votes.is_upvote and
+                         c.id == self.id).first()
         
         downvotes = select(count(c.votes)
                            for c in Complaint
-                           if not c.votes.is_upvote and
+                           if False in c.votes.is_upvote and
                            c.id == self.id).first()
 
         return {
@@ -168,11 +169,12 @@ class Complaint(db.Entity):
     def to_dict_sums(self):
         upvotes = select(count(c.votes)
                          for c in Complaint
-                         if c.votes.is_upvote and c.id == self.id).first()
+                         if True in c.votes.is_upvote and
+                         c.id == self.id).first()
 
         downvotes = select(count(c.votes)
                            for c in Complaint
-                           if not c.votes.is_upvote and
+                           if False in c.votes.is_upvote and
                            c.id == self.id).first()
 
         return {
