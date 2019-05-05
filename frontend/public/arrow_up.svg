@@ -1,10 +1,24 @@
-<svg width="35" height="66" viewBox="0 0 35 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="1" width="28" height="65">
-<rect x="3" y="1" width="28" height="65" rx="14" fill="#FFA370"/>
-</mask>
-<g mask="url(#mask0)">
-<rect width="35" height="33" fill="#FFA370"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="110 0 220 220" enable-background="new 110 0 220 220" xml:space="preserve">
+<g>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="103.3" y="0" width="233.3" height="220">
+			<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="103.3" y="0" width="233.3" height="220" id="mask0">
+		<path fill="#FFA370" filter="url(#Adobe_OpacityMaskFilter)" d="M216.7,6.7L216.7,6.7c51.3,0,93.3,42,93.3,93.3v246.7
+			c0,51.3-42,93.3-93.3,93.3l0,0c-51.3,0-93.3-42-93.3-93.3V100C123.3,48,165.3,6.7,216.7,6.7z"/>
+	</mask>
+	<g mask="url(#mask0)">
+		<rect x="103.3" y="0" fill="#FFA370" width="233.3" height="220"/>
+	</g>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" x1="249.3" y1="117.3" x2="221.3" y2="89.3"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" x1="192.7" y1="117.3" x2="221.3" y2="89.3"/>
 </g>
-<line x1="21.8993" y1="17.6569" x2="17.6566" y2="13.4142" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="13.4141" y1="17.6568" x2="17.6567" y2="13.4142" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
