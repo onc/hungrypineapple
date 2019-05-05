@@ -10,13 +10,18 @@
           <b-row>
             <!-- <b-col cols="1"></b-col>
             <b-col cols="10">-->
-            <b-col>
+            <b-col cols="10" style="width:100%">
               <SearchField></SearchField>
+            </b-col>
+            <b-col cols="2" style="width:100%">
+              <b-button class="bootstrap-botton-color" style="width:100%"
+                >Search</b-button
+              >
             </b-col>
             <!-- </b-col>
             <b-col cols="1"></b-col>-->
           </b-row>
-          <b-row style="padding:1em;">
+          <b-row style="padding-top:1.4em; padding-bottom:0.2em;">
             <b-col>
               <h3>Filters</h3>
             </b-col>
@@ -132,8 +137,13 @@ export default {
 <style scoped>
 .header-part {
   /* margin: 10px; */
+  background-image: url(/complaints-image.svg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  /* background-position-y: -10px; */
   margin-bottom: 10px;
   padding: 8px;
+  /* padding-bottom: 0px; */
   background-color: white;
   /* height: 45px; */
   border-radius: 0px 0px 8px 8px;
