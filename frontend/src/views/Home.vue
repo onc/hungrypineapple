@@ -86,19 +86,17 @@
         </b-col>
         <b-col cols="1"></b-col>
         <b-col cols="6">
-          <b-row>
-            <b-col v-for="opencall in opencalls" :key="opencall.id">
+          <b-row style="height:60%">
+            <b-col
+              v-for="opencall in opencalls"
+              :key="opencall.id"
+              style="padding: inherit; height: 100%"
+            >
               <OpenCallBrief :opencallid="opencall.id"></OpenCallBrief>
             </b-col>
-            <!-- <b-col>
-              <OpenCallBrief></OpenCallBrief>
-            </b-col>
-            <b-col>
-              <OpenCallBrief></OpenCallBrief>
-            </b-col>-->
           </b-row>
           <b-row>
-            <b-col>
+            <b-col style="padding-top:15px;">
               <!-- <b-button>See more</b-button> -->
               <span class="see-more" href="#">See more</span>
             </b-col>
@@ -163,10 +161,13 @@ export default {
   }
 }
 
+.nav-text a {
+  color: white !important;
+}
+
 .nav-text {
   font-weight: 800;
   padding: 0px 20px 0px 20px;
-  color: white;
 }
 
 .see-more {
