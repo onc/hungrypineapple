@@ -5,7 +5,7 @@
     <b-col class="full-height">
       <b-row style="height:65%">
         <b-col class="full-height">
-          <div class="image-opencall">Image goes here</div>
+          <div class="image-opencall"></div>
         </b-col>
       </b-row>
       <b-row style="height:35%">
