@@ -28,8 +28,8 @@ export default {
   getComplaints() {
     return api.get('complaint')
   },
-  getComplaintsByUserId(id) {
-    return api.get('user/' + id + '/complaints')
+  getComplaintsForUser(id) {
+    return api.get('user/' + id + '/complaint')
   },
   getComplaintsByLabelId(id) {
     return api.get('label/' + id + '/complaint')

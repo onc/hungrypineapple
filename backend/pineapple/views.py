@@ -3,7 +3,9 @@ import datetime
 from flask.views import MethodView
 from pony.orm import select, commit
 from flask import jsonify, Response, request
-from pineapple.models import Complaint, User, Label, City, Vote, Feedback
+from pineapple.models import Complaint, User, Label, City, Vote, \
+    ComplaintFeedback, OpenCallFeedback, OpenCall
+
 
 
 class UserView(MethodView):
@@ -48,7 +50,28 @@ class UserComplaintsView(MethodView):
         return jsonify(list(c.to_dict() for c in complaints))
 
 
-class FeedbackView(MethodView):
+class OpenCallFeedbackView(MethodView):
+    def post(self, user_id, o_id):
+        opencall = OpenCall.get(id=o_id)
+        if not opencall:
+            return Response(status=404)
+
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        data = json.loads(request.data)
+        text = data['text']
+
+        feedback = OpenCallFeedback(user=user,
+                                    opencall=opencall,
+                                    text=text)
+        commit()
+
+        return jsonify(feedback.to_dict())
+
+
+class ComplaintFeedbackView(MethodView):
     def post(self, user_id, c_id):
         complaint = Complaint.get(id=c_id)
         if not complaint:
@@ -61,9 +84,9 @@ class FeedbackView(MethodView):
         data = json.loads(request.data)
         text = data['text']
 
-        feedback = Feedback(user=user,
-                            complaint=complaint,
-                            text=text)
+        feedback = ComplaintFeedback(user=user,
+                                     complaint=complaint,
+                                     text=text)
         commit()
 
         return jsonify(feedback.to_dict())
@@ -167,7 +190,7 @@ class ComplaintView(MethodView):
     def get(self, id):
         if not id:
             complaints = select(p for p in Complaint)[:]
-            return jsonify(list(c.to_dict() for c in complaints))
+            return jsonify(list(c.to_dict_sums() for c in complaints))
 
         complaint = Complaint.get(id=id)
         if not complaint:
@@ -209,3 +232,51 @@ class ComplaintView(MethodView):
                               labels=labels)
         commit()
         return jsonify(complaint.to_dict_sums())
+
+
+class OpenCallView(MethodView):
+    def get(self, id):
+        if not id:
+            opencalls = select(p for p in OpenCall)[:]
+            return jsonify(list(c.to_dict() for c in opencalls))
+
+        opencall = OpenCall.get(id=id)
+        if not opencall:
+            return Response(status=404)
+        return jsonify(opencall.to_dict())
+
+    def put(self, id):
+        opencall = OpenCall.get(id=id)
+        if not opencall:
+            return Response(status=404)
+
+        data = json.loads(request.data)
+
+        city = City.get(id=data['city'])
+        if not city:
+            return Response(status=404)
+
+        opencall.title = data['title']
+        opencall.description = data['description']
+        opencall.created_at = datetime.datetime.now()
+        opencall.city = city
+        labels = select(l for l in Label if l.id in data['labels'])
+        opencall.labels = labels
+
+        commit()
+        return jsonify(opencall.to_dict())
+
+    def post(self, id):
+        data = json.loads(request.data)
+        labels = select(l for l in Label if l.id in data['labels'])
+        city = City.get(id=data['city'])
+        if not city:
+            return Response(status=404)
+
+        opencall = OpenCall(title=data['title'],
+                            description=data['description'],
+                            creator=User.get(id=data['creator']),
+                            city=city,
+                            labels=labels)
+        commit()
+        return jsonify(opencall.to_dict())
