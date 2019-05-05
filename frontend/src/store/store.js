@@ -11,7 +11,8 @@ export default new Vuex.Store({
     selectedCity: {
       id: NaN,
       name: ''
-    }
+    },
+    complaints: []
   },
   modules: {
     data
@@ -22,19 +23,26 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user
+    },
+    SET_COMPLAINTS_FOR_USER(state, complaints) {
+      state.complaints = complaints
     }
   },
   actions: {
     selectCity({ commit }, { cityId, cityName }) {
       commit('SET_CITY', { id: cityId, name: cityName })
     },
-
     fetchUser({ commit }, id) {
       return Service.getUserById(id).then(user => {
         commit('SET_USER', user.data)
       })
     },
-    
+    fetchComplaintsForUser({ commit}, user) {
+      return Service.getComplaintsForUser(user.id)
+        .then(complaints => {
+          commit('SET_COMPLAINTS_FOR_USER', complaints.data)
+        })
+    },
   },
   getters: {
     getSelectedCity: state => {
@@ -42,6 +50,9 @@ export default new Vuex.Store({
     },
     getUser: state => {
       return state.user
-    }
+    },
+    getComplaintsForUser: state => {
+      return state.complaints
+    },
   }
 })

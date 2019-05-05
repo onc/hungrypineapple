@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'app',
+  components: {
+  },
+  beforeCreate() {
+    this.$store.dispatch('fetchUser', 1)
   components: {},
   beforeCreate() {
     this.$store.dispatch('fetchCities')

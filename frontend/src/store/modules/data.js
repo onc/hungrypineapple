@@ -30,7 +30,6 @@ export const actions = {
     console.log(
       'New complaint: ' + title + ' from user ' + rootState.user.login
     )
-
     return Service.postComplaint({
       complainer: userId,
       description: desc,
@@ -44,7 +43,6 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
-
   fetchComplaints({ commit }) {
     Service.getComplaints()
       .then(response => {
@@ -54,7 +52,6 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
-
   fetchComplaintsByUserId() {
     Service.getComplaintsByUserId()
       .then(response => {
