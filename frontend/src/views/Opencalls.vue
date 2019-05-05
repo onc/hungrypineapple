@@ -42,7 +42,7 @@
               <b-dropdown
                 text="Date"
                 variant="outline-dark"
-                style="width:100%; background: white"
+                style="width:100%; background: white !important;"
                 class="shadow-box"
               >
                 <b-dropdown-item href="#">An item</b-dropdown-item>
