@@ -19,7 +19,12 @@
           size="sm"
           >Show</b-button
         >
-        <b-modal :id="`complaint-modal-${complaintid}`" size="lg" hide-header>
+        <b-modal
+          :id="`complaint-modal-${complaintid}`"
+          size="lg"
+          hide-header
+          hide-footer
+        >
           <ComplaintModal :id="complaintid"></ComplaintModal>
         </b-modal>
       </b-col>
