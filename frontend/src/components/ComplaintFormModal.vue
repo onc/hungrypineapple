@@ -8,7 +8,7 @@
         </h2>
       </b-row>
     </b-col>
-
+    
     <ComplaintForm :onSubmit="submit" :onReset="reset"/>
     
     <b-col cols="4">
@@ -27,6 +27,7 @@ import ComplaintForm from '@/components/ComplaintForm.vue';
 
 export default {
   name: 'ComplaintFormModal',
+  props: ['onClose'],
   components: {
     ComplaintForm
   },
@@ -34,16 +35,12 @@ export default {
     close() {
       this.$emit('modal-close')
     },
-    submit(evt) {
-      this.close();
-      // alert(JSON.stringify(this.form))
+    submit(evt, data) {
+      this.$store.dispatch('createComplaint', data);
+      this.onClose();
     },
     reset(evt) {
-      this.close();
-      // Reset our form values
-      // this.form.title = '';
-      // this.form.description = '';
-      // this.form.labels = [];
+      this.onClose();
     }
   }
 }

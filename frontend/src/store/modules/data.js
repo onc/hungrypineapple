@@ -24,18 +24,9 @@ export const mutations = {
 
 export const actions = {
   createComplaint(
-    { dispatch, rootState },
-    { userId, desc, title, labelIdArr }
+    { dispatch, rootState }, complaint
   ) {
-    console.log(
-      'New complaint: ' + title + ' from user ' + rootState.user.login
-    )
-    return Service.postComplaint({
-      complainer: userId,
-      description: desc,
-      title: title,
-      labels: labelIdArr
-    })
+    return Service.postComplaint(complaint)
       .then(() => {
         dispatch('fetchComplaints')
       })
@@ -61,7 +52,6 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
-
   fetchOpencalls({ commit }) {
     Service.getOpencalls()
       .then(response => {
@@ -71,7 +61,6 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
-
   fetchCities({ commit }) {
     Service.getCities()
       .then(response => {
@@ -81,7 +70,6 @@ export const actions = {
         console.log('error> ' + error.message)
       })
   },
-
   fetchLabels({ commit }) {
     Service.getLabels()
       .then(response => {
