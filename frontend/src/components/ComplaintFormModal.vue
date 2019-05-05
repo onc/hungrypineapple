@@ -1,29 +1,28 @@
 <template>
-<b-container id="modal">
-  <b-row>
-    <b-col cols="8">
-      <b-row>
-        <h2 slot="modal-title">
-          What's your complaint?
-        </h2>
-      </b-row>
-    </b-col>
-    
-    <ComplaintForm :onSubmit="submit" :onReset="reset"/>
-    
-    <b-col cols="4">
-      <b-row>
-        <button type="button" class="close" @click="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </b-row>
-    </b-col>
-  </b-row>
-</b-container>
+  <b-container id="modal" style="padding:25px;">
+    <b-row>
+      <b-col>
+        <!-- <b-col cols="8"> -->
+        <b-row>
+          <h2 slot="modal-title">What's your complaint?</h2>
+        </b-row>
+        <!-- </b-col> -->
+        <b-row>
+          <ComplaintForm :onSubmit="submit" :onReset="reset" />
+        </b-row>
+        <!-- <b-col cols="4"> -->
+        <b-row>
+          <!-- <button type="button" class="close" @click="close">
+            <span aria-hidden="true">&times;</span> -->
+          </button>
+        </b-row>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import ComplaintForm from '@/components/ComplaintForm.vue';
+import ComplaintForm from '@/components/ComplaintForm.vue'
 
 export default {
   name: 'ComplaintFormModal',
@@ -36,11 +35,11 @@ export default {
       this.$emit('modal-close')
     },
     submit(evt, data) {
-      this.$store.dispatch('createComplaint', data);
-      this.onClose();
+      this.$store.dispatch('createComplaint', data)
+      this.onClose()
     },
     reset(evt) {
-      this.onClose();
+      this.onClose()
     }
   }
 }

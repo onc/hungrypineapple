@@ -1,8 +1,3 @@
-# backend install + run
+# Team HungryPineapple @ HackPrague 2019
 
-sudo apt install python3
-pip3 install virtualenv
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
-./server.py
+This project is intended to improve the communication between citizens and people for example working for the townhall as well as helping citizens to get in touch for possible cooperations.
