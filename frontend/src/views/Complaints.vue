@@ -120,10 +120,10 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters['getUser']
+      return this.$store.getters.getUser
     },
     complaintsForUser() {
-      return this.$store.getters['getComplaintsForUser']
+      return this.$store.getters.getComplaintsForUser
     }
   },
   watch: {
