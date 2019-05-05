@@ -203,7 +203,16 @@ h5 {
 
 .main-title {
   display: inline-block;
+  color: white;
+  /* color: white; */
   font-size: 64px;
-  font-weight: 800;
+  font-weight: 900;
+  padding-bottom: 0.4em;
+}
+
+@media screen and (max-width: 1200px) {
+  .main-title {
+    color: #2c3e50;
+  }
 }
 </style>
