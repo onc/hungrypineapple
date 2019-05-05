@@ -106,10 +106,8 @@ import Navbar from '@/components/Navbar.vue'
 import SearchField from '@/components/SearchField.vue'
 
 export default {
-  name: 'complaints',
-  data: function() {
-    return {}
-  },
+  name: 'Complaints',
+  props: ['city'],
   components: {
     ComplaintItem,
     Navbar,
@@ -117,10 +115,10 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters.getUser
+      return this.$store.getters['getUser']
     },
     complaintsForUser() {
-      return this.$store.getters.getComplaintsForUser
+      return this.$store.getters['getComplaintsForUser']
     }
   },
   watch: {

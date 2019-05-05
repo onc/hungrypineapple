@@ -1,12 +1,19 @@
 <template>
   <div class="main-container" style="height:100%">
-    <Navbar></Navbar>
-    <!-- <b-navbar toggleable="lg">
-      <b-navbar-brand href="#">Home page</b-navbar-brand>
+    <b-navbar toggleable="lg">
+      <b-navbar-brand href="#"></b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-item class="nav-text" href="#">Complaints</b-nav-item>
-        <b-nav-item class="nav-text" href="#">Open Calls</b-nav-item>
+        <b-nav-item class="nav-text" href="#">
+          <router-link :to="{ path: `/city/${city}/complaints` }"
+            >Complaints</router-link
+          >
+        </b-nav-item>
+        <b-nav-item class="nav-text" href="#">
+          <router-link :to="{ path: 'opencalls' }" append
+            >Open calls</router-link
+          >
+        </b-nav-item>
         <b-nav-item class="nav-text" href="#">Login</b-nav-item>
         <b-nav-item class="nav-text" href="#">Sign up</b-nav-item>
       </b-navbar-nav>
@@ -104,33 +111,21 @@
         </b-col>
       </b-row>
     </b-container>
-    <!-- <el-container>
-    <el-header>
-      <h1>Sere mě {{ city }}</h1>
-      <Navbar />
-    </el-header>
-
-    <el-main>
-      <el-card shadow="always" v-for="complaint in complaints">Always</el-card>
-    </el-main>
-    </el-container>-->
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
 import ComplaintBrief from '@/components/Home/ComplaintBrief.vue'
 import OpenCallBrief from '@/components/Home/OpenCallBrief.vue'
 
 export default {
   components: {
-    Navbar,
     ComplaintBrief,
     OpenCallBrief
   },
   props: ['city'],
-  beforeCreate() {
-    this.$store.dispatch('fetchComplaints')
+  data() {
+    return {}
   },
   computed: {
     complaints() {
@@ -139,6 +134,9 @@ export default {
     opencalls() {
       return this.$store.state['data'].opencalls
     }
+  },
+  methods: {
+    showCitySelection() {}
   }
 }
 </script>
