@@ -3,7 +3,6 @@
     <b-navbar toggleable="lg">
       <b-navbar-brand href="#"></b-navbar-brand>
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item class="nav-text" href="#">
           <router-link :to="{ path: `/city/${city}/complaints` }"
@@ -18,7 +17,7 @@
         <b-nav-item class="nav-text" href="#">Login</b-nav-item>
         <b-nav-item class="nav-text" href="#">Sign up</b-nav-item>
       </b-navbar-nav>
-    </b-navbar>
+    </b-navbar>-->
     <b-container class="h-100">
       <b-row style="height:40%">
         <b-col class="my-auto">
@@ -202,7 +201,28 @@ h5 {
 
 .main-title {
   display: inline-block;
+  color: white;
+  /* color: white; */
   font-size: 64px;
-  font-weight: 800;
+  font-weight: 900;
+  padding-bottom: 0.4em;
+}
+
+.card-title {
+  /* display: inline-block; */
+  /* color: white; */
+  /* color: white; */
+  font-size: 64px;
+  font-weight: 900;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-top: 0.8em;
+  text-align: left;
+}
+
+@media screen and (max-width: 1200px) {
+  .main-title {
+    color: #2c3e50;
+  }
 }
 </style>
