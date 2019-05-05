@@ -1,15 +1,22 @@
 <template>
 <div>
   <h2>Complaints</h2>
-  {{ complaintsForUser }}
+  <div v-for="item in complaintsForUser">
+    <ComplaintItem :complaint="item" />
+  </div>
 </div>
 </template>
 
 <script>
+import ComplaintItem from '@/components/Home/ComplaintItem.vue'
+
 export default {
   name: 'complaints',
   data: function() {
     return {}
+  },
+  components: {
+    ComplaintItem
   },
   computed: {
     user() {
@@ -27,4 +34,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
