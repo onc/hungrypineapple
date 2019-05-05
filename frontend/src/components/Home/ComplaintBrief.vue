@@ -6,11 +6,13 @@
           <circle cx="8" cy="8" r="8" fill="#68D89B"></circle>
         </svg>
       </b-col>
-      <b-col cols="6" class="my-auto">
+      <b-col cols="7" class="my-auto">
         <div class="complaint-title">{{ complaint.title }}</div>
       </b-col>
-      <b-col cols="2" class="voting-buttons my-auto">Voting</b-col>
-      <b-col cols="2" class="show-me-button my-auto">
+      <b-col cols="2">
+        <div class="voting-overview"></div>
+      </b-col>
+      <b-col cols="2" class="show-me-button my-auto" style="padding-left:0px">
         <b-button
           v-b-modal="`complaint-modal-${complaintid}`"
           variant="outline-secondary"
@@ -59,5 +61,14 @@ export default {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.voting-overview {
+  width: 100%;
+  height: 100%;
+  background-image: url(/mock-voting.svg);
+  padding-left: 8px;
+  background-repeat: no-repeat;
+  background-position: right;
 }
 </style>

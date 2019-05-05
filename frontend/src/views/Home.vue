@@ -16,7 +16,7 @@
     </b-modal>
 
     <b-container class="h-100">
-      <b-row style="height:40%">
+      <b-row style="height:35%">
         <b-col class="my-auto">
           <b-row>
             <b-col class="my-auto">
@@ -44,7 +44,7 @@
           </b-row>
         </b-col>
       </b-row>
-
+      <b-row style="height:10%"></b-row>
       <b-row class="complaints-container" style="height:30%">
         <b-col cols="5" class="complaints-titles">
           <b-row>
@@ -79,7 +79,7 @@
           </b-row>
         </b-col>
       </b-row>
-      <b-row class="opencalls-container" style="height:30%">
+      <b-row class="opencalls-container" style="height:25%">
         <b-col cols="5">
           <b-row>
             <b-col>
@@ -107,7 +107,7 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col style="padding-top:15px;">
+            <b-col style="padding-top:15px;" class="see-more">
               <router-link :to="{ path: `/city/${city}/opencalls` }"
                 >See more</router-link
               >
@@ -182,6 +182,9 @@ export default {
 .see-more {
   font-weight: bold;
   cursor: pointer;
+}
+.see-more a {
+  color: #2c3e50 !important;
 }
 
 h1 {
