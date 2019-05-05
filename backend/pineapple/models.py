@@ -84,6 +84,7 @@ class User(db.Entity, UserMixin):
     @db_session
     def to_dict(self):
         return {
+            'id': self.id,
             'login': self.login,
             'subscriptions': list(map(lambda s: s.id, self.subscriptions))
         }
@@ -106,6 +107,15 @@ class Complaint(db.Entity):
 
     @db_session
     def to_dict_vote(self, vote):
+        upvotes = select(count(c.votes)
+                         for c in Complaint
+                         if c.votes.is_upvote and c.id == self.id).first()
+        
+        downvotes = select(count(c.votes)
+                           for c in Complaint
+                           if not c.votes.is_upvote and
+                           c.id == self.id).first()
+
         return {
             'id': self.id,
             'title': self.title,
@@ -115,6 +125,8 @@ class Complaint(db.Entity):
             'complainer': self.complainer.id,
             'created_at': self.created_at.isoformat(),
             'is_upvote': vote,
+            'upvotes': upvotes,
+            'downvotes': downvotes,
             'feedback': list(map(lambda f: {
                 'feedback_id': f.id,
                 'text': f.text,
@@ -132,7 +144,8 @@ class Complaint(db.Entity):
 
         downvotes = select(count(c.votes)
                            for c in Complaint
-                           if not c.votes.is_upvote and c.id == self.id).first()
+                           if not c.votes.is_upvote and
+                           c.id == self.id).first()
 
         return {
             'id': self.id,

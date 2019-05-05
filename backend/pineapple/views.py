@@ -167,7 +167,7 @@ class ComplaintView(MethodView):
     def get(self, id):
         if not id:
             complaints = select(p for p in Complaint)[:]
-            return jsonify(list(c.to_dict() for c in complaints))
+            return jsonify(list(c.to_dict_sums() for c in complaints))
 
         complaint = Complaint.get(id=id)
         if not complaint:
