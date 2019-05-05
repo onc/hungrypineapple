@@ -162,13 +162,15 @@ class VoteView(MethodView):
         return Response(status=200)
 
 
-class SubscriptionView(MethodView):
+class ComplaintSubscriptionView(MethodView):
     def get(self, user_id):
         user = User.get(id=user_id)
         if not user:
             return Response(status=404)
 
-        subscriptions = list(map(lambda s: s.to_dict(), user.subscriptions))
+        subscriptions = list(map(lambda s: s.to_dict(),
+                                 user.subscribed_complaints))
+
         return jsonify(subscriptions)
 
     def post(self, user_id, c_id):
@@ -180,7 +182,33 @@ class SubscriptionView(MethodView):
         if not user:
             return Response(status=404)
 
-        complaint.subscribers.add(user)
+        complaint.subscribed_complaints.add(user)
+        commit()
+
+        return Response(status=200)
+
+
+class OpenCallSubscriptionView(MethodView):
+    def get(self, user_id):
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        subscriptions = list(map(lambda s: s.to_dict(),
+                                 user.subscribed_opencalls))
+
+        return jsonify(subscriptions)
+
+    def post(self, user_id, c_id):
+        opencall = OpenCall.get(id=c_id)
+        if not opencall:
+            return Response(status=404)
+
+        user = User.get(id=user_id)
+        if not user:
+            return Response(status=404)
+
+        opencall.subscribed_opencalls.add(user)
         commit()
 
         return Response(status=200)

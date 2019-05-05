@@ -9,7 +9,8 @@ from pineapple.models import Complaint, User, db, Label, City, Vote, OpenCall
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
     LabelComplaintsView, LabelView, CityComplaintsView, \
     LoggedInUserComplaintView, VoteView, ComplaintFeedbackView, CityView, \
-    SubscriptionView, OpenCallFeedbackView, OpenCallView
+    ComplaintSubscriptionView, OpenCallFeedbackView, OpenCallView, \
+    OpenCallSubscriptionView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
@@ -18,11 +19,18 @@ app.config.update(DEBUG=True)
 app.add_url_rule('/api/user/<id>',
                  view_func=UserView.as_view('user'))
 
-app.add_url_rule('/api/user/<user_id>/subscriptions',
-                 view_func=SubscriptionView.as_view('subscriptions'))
+app.add_url_rule('/api/user/<user_id>/complaint/subscriptions',
+                 view_func=ComplaintSubscriptionView.as_view('comp_subscriptions'))
 
 app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/subscribe',
-                 view_func=SubscriptionView.as_view('subscribe'))
+                 view_func=ComplaintSubscriptionView.as_view('comp_subscribe'))
+
+app.add_url_rule('/api/user/<user_id>/opencall/subscriptions',
+                 view_func=OpenCallSubscriptionView.as_view('open_subscriptions'))
+
+app.add_url_rule('/api/user/<user_id>/opencall/<c_id>/subscribe',
+                 view_func=OpenCallSubscriptionView.as_view('open_subscribe'))
+
 
 app.add_url_rule('/api/user/<user_id>/complaint',
                  view_func=LoggedInUserComplaintView.as_view('loggedInUser'))

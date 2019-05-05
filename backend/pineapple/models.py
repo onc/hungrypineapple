@@ -110,7 +110,10 @@ class User(db.Entity, UserMixin):
         return {
             'id': self.id,
             'login': self.login,
-            'subscriptions': list(map(lambda s: s.id, self.subscriptions))
+            'complaint_subscriptions': list(map(lambda s: s.id,
+                                                self.subscribed_complaints)),
+            'opencall_subscriptions': list(map(lambda s: s.id,
+                                               self.subscribed_opencalls))
         }
 
 
