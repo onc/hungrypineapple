@@ -1,16 +1,16 @@
 <template>
   <div class="main-container" style="height:100%">
-    <b-navbar toggleable="lg">
+    <Navbar></Navbar>
+    <!-- <b-navbar toggleable="lg">
       <b-navbar-brand href="#">Home page</b-navbar-brand>
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item class="nav-text" href="#">Complaints</b-nav-item>
         <b-nav-item class="nav-text" href="#">Open Calls</b-nav-item>
         <b-nav-item class="nav-text" href="#">Login</b-nav-item>
         <b-nav-item class="nav-text" href="#">Sign up</b-nav-item>
       </b-navbar-nav>
-    </b-navbar>
+    </b-navbar>-->
     <b-container class="h-100">
       <b-row style="height:40%">
         <b-col class="my-auto">
@@ -208,6 +208,18 @@ h5 {
   font-size: 64px;
   font-weight: 900;
   padding-bottom: 0.4em;
+}
+
+.card-title {
+  /* display: inline-block; */
+  /* color: white; */
+  /* color: white; */
+  font-size: 64px;
+  font-weight: 900;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-top: 0.8em;
+  text-align: left;
 }
 
 @media screen and (max-width: 1200px) {

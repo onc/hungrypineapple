@@ -1,12 +1,15 @@
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal">
-    <el-menu-item index="1">
-      <router-link :to="{ name: 'complaint-list' }">Complaints</router-link>
-    </el-menu-item>
-    <el-menu-item index="2">
-      <router-link :to="{ name: 'opencall-list' }">Open calls</router-link>
-    </el-menu-item>
-  </el-menu>
+  <b-navbar toggleable="lg" class="my-nav">
+    <b-navbar-brand href="#" variant="info">Home page</b-navbar-brand>
+
+    <!-- Right aligned nav items -->
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item class="nav-text" href="/complaints">Complaints</b-nav-item>
+      <b-nav-item class="nav-text" href="/opencalls">Open Calls</b-nav-item>
+      <b-nav-item class="nav-text" href="#">Login</b-nav-item>
+      <b-nav-item class="nav-text" href="#">Sign up</b-nav-item>
+    </b-navbar-nav>
+  </b-navbar>
 </template>
 
 <script>
@@ -20,4 +23,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.my-nav {
+  background-color: #ffa370;
+}
+</style>
