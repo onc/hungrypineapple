@@ -11,8 +11,6 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('fetchUser', 1)
-  components: {},
-  beforeCreate() {
     this.$store.dispatch('fetchCities')
     this.$store.dispatch('fetchComplaints')
     this.$store.dispatch('fetchLabels')
