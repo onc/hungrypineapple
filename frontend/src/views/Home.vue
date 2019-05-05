@@ -5,10 +5,10 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#">Complaints</b-nav-item>
-        <b-nav-item href="#">Open Calls</b-nav-item>
-        <b-nav-item href="#">Login</b-nav-item>
-        <b-nav-item href="#">Sign up</b-nav-item>
+        <b-nav-item class="nav-text" href="#">Complaints</b-nav-item>
+        <b-nav-item class="nav-text" href="#">Open Calls</b-nav-item>
+        <b-nav-item class="nav-text" href="#">Login</b-nav-item>
+        <b-nav-item class="nav-text" href="#">Sign up</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
     <b-container class="h-100">
@@ -158,6 +158,11 @@ export default {
   .complaints-titles {
     color: black;
   }
+}
+
+.nav-text {
+  font-weight: 800;
+  padding: 0px 20px 0px 20px;
 }
 
 .see-more {
