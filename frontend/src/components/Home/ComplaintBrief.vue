@@ -55,5 +55,9 @@ export default {
   font-size: 16px;
   font-weight: 600;
   text-align: left;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
