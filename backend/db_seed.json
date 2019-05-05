@@ -54,6 +54,28 @@
     "labels": [1, 2],
     "subscribers": []
   }],
+  "OpenCall": [{
+    "title": "First opencall",
+    "description": "calll",
+    "city": 1,
+    "creator": 1,
+    "labels": [1],
+    "subscribers": [4]
+  }, {
+    "title": "Second open call",
+    "description": "More call",
+    "city": 2,
+    "creator": 1,
+    "labels": [2],
+    "subscribers": []
+  }, {
+    "title": "Third open call",
+    "description": "bar",
+    "city": 2,
+    "creator": 1,
+    "labels": [1, 2],
+    "subscribers": []
+  }],
   "Vote": [{
     "user": 1,
     "complaint": 2,

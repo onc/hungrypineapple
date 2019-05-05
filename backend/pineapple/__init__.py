@@ -5,11 +5,11 @@ from flask import Flask, jsonify, request
 from flask_login import LoginManager, login_required
 from pony.flask import Pony
 from pony.orm import db_session, select
-from pineapple.models import Complaint, User, db, Label, City, Vote
+from pineapple.models import Complaint, User, db, Label, City, Vote, OpenCall
 from pineapple.views import ComplaintView, UserView, UserComplaintsView, \
     LabelComplaintsView, LabelView, CityComplaintsView, \
-    LoggedInUserComplaintView, VoteView, FeedbackView, CityView, \
-    SubscriptionView
+    LoggedInUserComplaintView, VoteView, ComplaintFeedbackView, CityView, \
+    SubscriptionView, OpenCallFeedbackView, OpenCallView
 
 app = Flask(__name__)
 app.config.update(DEBUG=True)
@@ -31,7 +31,10 @@ app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/vote',
                  view_func=VoteView.as_view('vote'))
 
 app.add_url_rule('/api/user/<user_id>/complaint/<c_id>/feedback',
-                 view_func=FeedbackView.as_view('feedback'))
+                 view_func=ComplaintFeedbackView.as_view('complaintFeedback'))
+
+app.add_url_rule('/api/user/<user_id>/opencall/<o_id>/feedback',
+                 view_func=OpenCallFeedbackView.as_view('openCallFeedback'))
 
 # label related
 app.add_url_rule('/api/label/<id>/complaint',
@@ -51,12 +54,19 @@ app.add_url_rule('/api/label/<id>',
 app.add_url_rule('/api/city/<id>/complaint',
                  view_func=CityComplaintsView.as_view('cityComplaints'))
 
+# opencall
+app.add_url_rule('/api/opencall',
+                 defaults={'id': None},
+                 view_func=OpenCallView.as_view('opencalls'))
+app.add_url_rule('/api/opencall/<id>',
+                 view_func=OpenCallView.as_view('opencall'))
+
 # complaint views
 app.add_url_rule('/api/complaint',
                  defaults={'id': None},
-                 view_func=ComplaintView.as_view('complaint'))
-app.add_url_rule('/api/complaint/<id>',
                  view_func=ComplaintView.as_view('complaints'))
+app.add_url_rule('/api/complaint/<id>',
+                 view_func=ComplaintView.as_view('complaint'))
 
 
 Pony(app)
@@ -88,7 +98,6 @@ def seed_database(dump_filename):
         City(id=record['id'],
              name=record['name'])
 
-    # going through the list of brands
     for record in data['Complaint']:
         labels = select(l for l in Label if l.id in record['labels'])
         city = City.get(id=record['city'])
@@ -99,6 +108,17 @@ def seed_database(dump_filename):
                   city=city,
                   subscribers=subscribers,
                   labels=labels)
+
+    for record in data['OpenCall']:
+        labels = select(l for l in Label if l.id in record['labels'])
+        city = City.get(id=record['city'])
+        subscribers = select(u for u in User if u.id in record['subscribers'])
+        OpenCall(title=record['title'],
+                 description=record['description'],
+                 creator=User.get(id=record['creator']),
+                 city=city,
+                 subscribers=subscribers,
+                 labels=labels)
 
     for record in data['Vote']:
         Vote(user=User.get(id=record['user']),
