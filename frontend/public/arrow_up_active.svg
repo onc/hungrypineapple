@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="110 0 220 220" enable-background="new 110 0 220 220" xml:space="preserve">
+<g>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="103.3" y="0" width="233.3" height="220">
+			<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="103.3" y="0" width="233.3" height="220" id="mask0">
+		<path fill="#FFA370" filter="url(#Adobe_OpacityMaskFilter)" d="M216.8,6.7L216.8,6.7c51.3,0,93.3,42,93.3,93.3v246.7
+			c0,51.3-42,93.3-93.3,93.3l0,0c-51.3,0-93.3-42-93.3-93.3V100C123.3,48,165.4,6.7,216.8,6.7z"/>
+	</mask>
+	<g mask="url(#mask0)">
+		<rect x="103.3" fill="#0B8202" width="233.3" height="220"/>
+	</g>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" x1="249.4" y1="117.3" x2="221.4" y2="89.3"/>
+	
+		<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" x1="192.8" y1="117.3" x2="221.4" y2="89.3"/>
+</g>
+</svg>
