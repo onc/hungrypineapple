@@ -11,6 +11,7 @@ class City(db.Entity):
     id = PrimaryKey(int, auto=True)
     name = Required(str, unique=True)
     complaints = Set('Complaint')
+    opencalls = Set('OpenCall')
     users = Set('User')
 
     @db_session
@@ -25,6 +26,7 @@ class Label(db.Entity):
     id = PrimaryKey(int, auto=True)
     name = Required(str, unique=True)
     complaint = Set('Complaint')
+    opencalls = Set('OpenCall')
 
     @db_session
     def to_dict(self):
@@ -34,7 +36,7 @@ class Label(db.Entity):
         }
 
 
-class Feedback(db.Entity):
+class ComplaintFeedback(db.Entity):
     id = PrimaryKey(int, auto=True)
     text = Required(str)
     user = Required('User')
@@ -48,6 +50,25 @@ class Feedback(db.Entity):
             'id': self.id,
             'user': self.user.id,
             'complaint': self.complaint.id,
+            'text': self.text,
+            'created_at': self.created_at.isoformat()
+        }
+
+
+class OpenCallFeedback(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    text = Required(str)
+    user = Required('User')
+    opencall = Required('OpenCall')
+    created_at = Required(datetime.datetime,
+                          default=datetime.datetime.utcnow)
+
+    @db_session
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user': self.user.id,
+            'opencall': self.opencall.id,
             'text': self.text,
             'created_at': self.created_at.isoformat()
         }
@@ -77,9 +98,12 @@ class User(db.Entity, UserMixin):
     # 0 = citizen, 1 = townhall, 2 = moderator
     role = Required(int, default=0)
     complaints = Set('Complaint', reverse="complainer")
+    opencalls = Set('OpenCall', reverse="creator")
     votes = Set('Vote')
-    feedbacks = Set('Feedback')
-    subscriptions = Set('Complaint', reverse="subscribers")
+    complaint_feedbacks = Set('ComplaintFeedback')
+    opencall_feedbacks = Set('OpenCallFeedback')
+    subscribed_complaints = Set('Complaint', reverse="subscribers")
+    subscribed_opencalls = Set('OpenCall', reverse="subscribers")
 
     @db_session
     def to_dict(self):
@@ -102,8 +126,8 @@ class Complaint(db.Entity):
     city = Required('City')
     labels = Set('Label')
     votes = Set('Vote')
-    feedbacks = Set('Feedback')
-    subscribers = Set('User', reverse="subscriptions")
+    feedbacks = Set('ComplaintFeedback')
+    subscribers = Set('User', reverse="subscribed_complaints")
 
     @db_session
     def to_dict_vote(self, vote):
@@ -121,6 +145,7 @@ class Complaint(db.Entity):
             'title': self.title,
             'description': self.description,
             'state': self.state,
+            'approved': self.approved,
             'city': self.city.to_dict(),
             'complainer': self.complainer.id,
             'created_at': self.created_at.isoformat(),
@@ -152,6 +177,7 @@ class Complaint(db.Entity):
             'title': self.title,
             'description': self.description,
             'state': self.state,
+            'approved': self.approved,
             'city': self.city.to_dict(),
             'complainer': self.complainer.id,
             'created_at': self.created_at.isoformat(),
@@ -162,6 +188,39 @@ class Complaint(db.Entity):
                 'text': f.text,
                 'user': f.user.id,
                 'created_at': self.created_at.isoformat()
+            }, self.feedbacks)),
+            'labels': list(map(lambda x: x.to_dict(), self.labels))
+        }
+
+
+class OpenCall(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    title = Required(str)
+    state = Required(str, default='OPEN')
+    description = Required(str)
+    created_at = Required(datetime.datetime,
+                          default=datetime.datetime.utcnow)
+    creator = Required('User')
+    city = Required('City')
+    labels = Set('Label')
+    feedbacks = Set('OpenCallFeedback')
+    subscribers = Set('User', reverse="subscribed_opencalls")
+
+    @db_session
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'state': self.state,
+            'city': self.city.to_dict(),
+            'creator': self.creator.id,
+            'created_at': self.created_at.isoformat(),
+            'feedback': list(map(lambda f: {
+                'feedback_id': f.id,
+                'text': f.text,
+                'user': f.user.id,
+                'created_at': f.created_at.isoformat()
             }, self.feedbacks)),
             'labels': list(map(lambda x: x.to_dict(), self.labels))
         }

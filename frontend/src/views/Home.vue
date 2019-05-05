@@ -16,7 +16,10 @@
         <b-col class="my-auto">
           <b-row>
             <b-col class="my-auto">
-              <h1>Help us improve {{ city }}</h1>
+              <div class="main-title">
+                Help us improve
+                <a class="change-city">{{ city }}</a>
+              </div>
             </b-col>
           </b-row>
           <b-row>
@@ -163,6 +166,7 @@ export default {
 .nav-text {
   font-weight: 800;
   padding: 0px 20px 0px 20px;
+  color: white;
 }
 
 .see-more {
@@ -191,5 +195,14 @@ h5 {
   font-size: 18px;
   font-weight: 600;
   text-align: right;
+}
+
+.change-city {
+}
+
+.main-title {
+  display: inline-block;
+  font-size: 64px;
+  font-weight: 800;
 }
 </style>

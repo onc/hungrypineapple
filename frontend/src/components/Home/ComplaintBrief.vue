@@ -6,8 +6,8 @@
           <circle cx="8" cy="8" r="8" fill="#68D89B"></circle>
         </svg>
       </b-col>
-      <b-col cols="6" class="complaint-title my-auto">
-        <h3>{{ complaint.title }}</h3>
+      <b-col cols="6" class="my-auto">
+        <div class="complaint-title">{{ complaint.title }}</div>
       </b-col>
       <b-col cols="2" class="voting-buttons my-auto">Voting</b-col>
       <b-col cols="2" class="show-me-button my-auto">
@@ -51,7 +51,7 @@ export default {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-h3 {
+.complaint-title {
   font-size: 16px;
   font-weight: 600;
   text-align: left;
